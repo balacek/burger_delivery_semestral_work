@@ -1,1 +1,1 @@
-# burger_delivery_semestral_work
+# Semestralni prace pro pokrocile programovani - Hradec 
