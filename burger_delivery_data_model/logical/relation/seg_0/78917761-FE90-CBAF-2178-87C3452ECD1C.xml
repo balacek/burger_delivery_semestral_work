@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="BUR_ING_REL" directorySegmentName="seg_0" id="78917761-FE90-CBAF-2178-87C3452ECD1C">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 09:01:45 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>A83E8F9F-073E-DA26-859E-D4302B82B7DF</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>16C870D8-6751-C5A6-CC91-77367C93CFF3</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

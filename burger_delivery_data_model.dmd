@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="burger_delivery_data_model" id="BE663E61-B670-17DF-5DA9-035465CBBE60" version="3.5">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:35:56 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>BE663E61-B670-17DF-5DA9-035465CBBE60</designId>
+</OSDM_Design>

@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="C53CD77A-0FE1-C554-9529-3E1CAAD73493">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:35:57 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>

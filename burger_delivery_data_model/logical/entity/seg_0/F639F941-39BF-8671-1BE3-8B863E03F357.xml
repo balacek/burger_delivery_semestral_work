@@ -1,0 +1,84 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F639F941-39BF-8671-1BE3-8B863E03F357" name="ORDER">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:56:14 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="14BA3746-A3B6-5FAB-793E-0D81EBF0E3B6">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:56:21 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="datum_vytvoreni" id="B9384A21-021B-E2C7-4221-39ED1686CC4D">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:56:23 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="state" id="BCA0E557-79F8-D0B5-E16C-E6351B5A3FBA">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:57:25 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="72E467C8-10D0-8F2F-D0B0-322421AF8C0B">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:58:29 UTC</createdTime>
+<generatorID>0127FD77-B243-D71A-A24E-CB433DC06D7B</generatorID>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<referedAttribute>7C771907-254E-4216-4E50-62D21FA2489E</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id2" id="B15F41F5-FCB4-835F-B353-09605E72F7F6">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 09:00:23 UTC</createdTime>
+<generatorID>5BFC11EC-9BD6-9ACD-4F7B-B17F73D52895</generatorID>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<referedAttribute>FEDB158A-7117-C441-C5AB-CB759FE42717</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="total_price" id="242EF825-1294-39C0-7EC1-82FFB39F2B75">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 09:17:32 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<engineerTo>
+<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+</Entity>

@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="A2D0F803-73BB-4589-E5AE-ABCA241112F1" mainViewID="DFE97E54-71C4-B749-6335-5457AAF7674E">
+<createdBy>dbala</createdBy>
+<createdTime>2020-12-24 08:35:56 UTC</createdTime>
+<ownerDesignName>burger_delivery_data_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>
