@@ -1,10 +1,7 @@
 package com.semestralwork.burger_delivery.domain.adress;
 
-import com.semestralwork.burger_delivery.domain.order.Order;
-
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +9,7 @@ public class Adress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int adressId;
+    private Long adressId;
 
     @NotNull
     @Column(length = 100)
@@ -35,11 +32,11 @@ public class Adress {
         this.postalCode = postalCode;
     }
 
-    public int getAdressId() {
+    public long getAdressId() {
         return adressId;
     }
 
-    public void setAdressId(int adressId) {
+    public void setAdressId(long adressId) {
         this.adressId = adressId;
     }
 

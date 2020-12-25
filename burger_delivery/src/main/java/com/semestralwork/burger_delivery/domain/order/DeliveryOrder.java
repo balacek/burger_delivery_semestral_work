@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Order {
+public class DeliveryOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    private Long orderId;
 
-    @CreationTimestamp
     @Column
+    @CreationTimestamp
     private Date created;
 
     @Enumerated(EnumType.STRING)
@@ -37,14 +37,14 @@ public class Order {
     @JoinColumn(name = "order_fk", referencedColumnName = "orderId")
     private List<Burger> burgers;
 
-    public Order() {
+    public DeliveryOrder() {
     }
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
@@ -91,14 +91,14 @@ public class Order {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
-        return getOrderId() == order.getOrderId() &&
-                Objects.equals(getCreated(), order.getCreated()) &&
-                getOrderstate() == order.getOrderstate() &&
-                Objects.equals(getTotalPrice(), order.getTotalPrice()) &&
-                Objects.equals(getAdress(), order.getAdress()) &&
-                Objects.equals(getBurgers(), order.getBurgers());
+        if (!(o instanceof DeliveryOrder)) return false;
+        DeliveryOrder deliveryOrder = (DeliveryOrder) o;
+        return getOrderId() == deliveryOrder.getOrderId() &&
+                Objects.equals(getCreated(), deliveryOrder.getCreated()) &&
+                getOrderstate() == deliveryOrder.getOrderstate() &&
+                Objects.equals(getTotalPrice(), deliveryOrder.getTotalPrice()) &&
+                Objects.equals(getAdress(), deliveryOrder.getAdress()) &&
+                Objects.equals(getBurgers(), deliveryOrder.getBurgers());
     }
 
     @Override

@@ -14,7 +14,7 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ingredientId;
+    private Long ingredientId;
 
     @NotNull
     @Column
@@ -30,11 +30,11 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public int getIngredientId() {
+    public long getIngredientId() {
         return ingredientId;
     }
 
-    public void setIngredientId(int ingredientId) {
+    public void setIngredientId(long ingredientId) {
         this.ingredientId = ingredientId;
     }
 

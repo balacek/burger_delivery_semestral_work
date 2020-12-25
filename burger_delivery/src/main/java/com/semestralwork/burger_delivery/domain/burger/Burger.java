@@ -1,7 +1,6 @@
 package com.semestralwork.burger_delivery.domain.burger;
 
 import com.semestralwork.burger_delivery.domain.ingredient.Ingredient;
-import com.semestralwork.burger_delivery.domain.order.Order;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +11,7 @@ public class Burger {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int burgerId;
+    private Long burgerId;
 
     @Column(length = 50)
     private String burgerName;
@@ -25,11 +24,11 @@ public class Burger {
     public Burger() {
     }
 
-    public int getBurgerId() {
+    public long getBurgerId() {
         return burgerId;
     }
 
-    public void setBurgerId(int burgerId) {
+    public void setBurgerId(long burgerId) {
         this.burgerId = burgerId;
     }
 
