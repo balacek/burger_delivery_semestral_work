@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Ingredient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ingredientId;
 
     @NotNull
@@ -30,11 +30,11 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public long getIngredientId() {
+    public Long getIngredientId() {
         return ingredientId;
     }
 
-    public void setIngredientId(long ingredientId) {
+    public void setIngredientId(Long ingredientId) {
         this.ingredientId = ingredientId;
     }
 
@@ -67,7 +67,7 @@ public class Ingredient {
         if (this == o) return true;
         if (!(o instanceof Ingredient)) return false;
         Ingredient that = (Ingredient) o;
-        return getIngredientId() == that.getIngredientId() &&
+        return Objects.equals(getIngredientId(), that.getIngredientId()) &&
                 Objects.equals(getPrice(), that.getPrice()) &&
                 Objects.equals(getType(), that.getType()) &&
                 Objects.equals(getBurgers(), that.getBurgers());

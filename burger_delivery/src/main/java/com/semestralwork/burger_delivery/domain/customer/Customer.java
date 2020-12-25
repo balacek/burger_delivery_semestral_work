@@ -7,12 +7,13 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerId;
 
     @NotNull
@@ -45,11 +46,11 @@ public class Customer {
     public Customer() {
     }
 
-    public long getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
@@ -93,18 +94,6 @@ public class Customer {
         this.password = password;
     }
 
-    public CUSTOMERTYPE getCustomertype() {
-        return customerType;
-    }
-
-    public void setCustomertype(CUSTOMERTYPE customerType) {
-        this.customerType = customerType;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
     public CUSTOMERTYPE getCustomerType() {
         return customerType;
     }
@@ -119,5 +108,25 @@ public class Customer {
 
     public void setOrders(List<DeliveryOrder> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(getCustomerId(), customer.getCustomerId()) &&
+                Objects.equals(getName(), customer.getName()) &&
+                Objects.equals(getSurname(), customer.getSurname()) &&
+                Objects.equals(getEmail(), customer.getEmail()) &&
+                Objects.equals(getPhone(), customer.getPhone()) &&
+                Objects.equals(getPassword(), customer.getPassword()) &&
+                getCustomerType() == customer.getCustomerType() &&
+                Objects.equals(getOrders(), customer.getOrders());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCustomerId(), getName(), getSurname(), getEmail(), getPhone(), getPassword(), getCustomerType(), getOrders());
     }
 }

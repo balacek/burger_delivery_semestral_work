@@ -15,7 +15,7 @@ import java.util.Objects;
 public class DeliveryOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
 
     @Column
@@ -40,11 +40,11 @@ public class DeliveryOrder {
     public DeliveryOrder() {
     }
 
-    public long getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -92,13 +92,13 @@ public class DeliveryOrder {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DeliveryOrder)) return false;
-        DeliveryOrder deliveryOrder = (DeliveryOrder) o;
-        return getOrderId() == deliveryOrder.getOrderId() &&
-                Objects.equals(getCreated(), deliveryOrder.getCreated()) &&
-                getOrderstate() == deliveryOrder.getOrderstate() &&
-                Objects.equals(getTotalPrice(), deliveryOrder.getTotalPrice()) &&
-                Objects.equals(getAdress(), deliveryOrder.getAdress()) &&
-                Objects.equals(getBurgers(), deliveryOrder.getBurgers());
+        DeliveryOrder that = (DeliveryOrder) o;
+        return Objects.equals(getOrderId(), that.getOrderId()) &&
+                Objects.equals(getCreated(), that.getCreated()) &&
+                getOrderstate() == that.getOrderstate() &&
+                Objects.equals(getTotalPrice(), that.getTotalPrice()) &&
+                Objects.equals(getAdress(), that.getAdress()) &&
+                Objects.equals(getBurgers(), that.getBurgers());
     }
 
     @Override

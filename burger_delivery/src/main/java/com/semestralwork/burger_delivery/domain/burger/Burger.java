@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Burger {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long burgerId;
 
     @Column(length = 50)
@@ -24,11 +24,11 @@ public class Burger {
     public Burger() {
     }
 
-    public long getBurgerId() {
+    public Long getBurgerId() {
         return burgerId;
     }
 
-    public void setBurgerId(long burgerId) {
+    public void setBurgerId(Long burgerId) {
         this.burgerId = burgerId;
     }
 

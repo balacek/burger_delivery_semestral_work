@@ -15,16 +15,16 @@ import java.util.List;
 @RequestMapping("/api")
 public class CustomerController {
 
-   // @Autowired
-   // private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-   /* @RequestMapping(value = "/save-customer", method = RequestMethod.POST)
-    public Customer saveCustomer(@RequestBody CustomerDto customerDto){
-        return customerRepository.save(customerDto.getCustomer());
+    @RequestMapping(value = "/save-customer", method = RequestMethod.POST)
+    public Customer saveCustomer(@RequestBody Customer customer){
+        return customerRepository.save(customer);
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public List<Customer> getCustomer(){
         return customerRepository.findAll();
-    }*/
+    }
 }

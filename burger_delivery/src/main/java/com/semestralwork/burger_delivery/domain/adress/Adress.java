@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Adress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long adressId;
 
     @NotNull
@@ -32,11 +32,11 @@ public class Adress {
         this.postalCode = postalCode;
     }
 
-    public long getAdressId() {
+    public Long getAdressId() {
         return adressId;
     }
 
-    public void setAdressId(long adressId) {
+    public void setAdressId(Long adressId) {
         this.adressId = adressId;
     }
 
@@ -69,7 +69,7 @@ public class Adress {
         if (this == o) return true;
         if (!(o instanceof Adress)) return false;
         Adress adress = (Adress) o;
-        return getAdressId() == adress.getAdressId() &&
+        return Objects.equals(getAdressId(), adress.getAdressId()) &&
                 Objects.equals(getCity(), adress.getCity()) &&
                 Objects.equals(getStreet(), adress.getStreet()) &&
                 Objects.equals(getPostalCode(), adress.getPostalCode());
