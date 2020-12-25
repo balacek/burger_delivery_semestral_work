@@ -1,7 +1,10 @@
 package com.semestralwork.burger_delivery.domain.adress;
 
+import com.semestralwork.burger_delivery.domain.order.Order;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity

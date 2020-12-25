@@ -1,11 +1,14 @@
 package com.semestralwork.burger_delivery.domain.customer;
 
+import com.semestralwork.burger_delivery.domain.order.Order;
 import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
+import java.util.prefs.Preferences;
 
 @Entity
 public class Customer {
@@ -36,6 +39,10 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     @Column(length = 50)
     private CUSTOMERTYPE customertype;
+
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_fk", referencedColumnName = "customerId")
+    private List<Order> orders;
 
     public Customer() {
     }
@@ -96,6 +103,14 @@ public class Customer {
         this.customertype = customertype;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,11 +122,12 @@ public class Customer {
                 Objects.equals(getEmail(), customer.getEmail()) &&
                 Objects.equals(getPhone(), customer.getPhone()) &&
                 Objects.equals(getPassword(), customer.getPassword()) &&
-                getCustomertype() == customer.getCustomertype();
+                getCustomertype() == customer.getCustomertype() &&
+                Objects.equals(getOrders(), customer.getOrders());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCustomerId(), getName(), getSurname(), getEmail(), getPhone(), getPassword(), getCustomertype());
+        return Objects.hash(getCustomerId(), getName(), getSurname(), getEmail(), getPhone(), getPassword(), getCustomertype(), getOrders());
     }
 }
