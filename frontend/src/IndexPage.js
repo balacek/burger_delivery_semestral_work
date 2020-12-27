@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import LeftContainer from './leftContainer/LeftContainer';
-import RightContainer from './rightContainer/rightContainer';
+import RightContainer from './rightContainer/RightContainer';
 
 const useStyles = makeStyles((theme) => ({
     root: {

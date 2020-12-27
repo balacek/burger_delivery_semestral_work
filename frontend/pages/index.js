@@ -1,8 +1,8 @@
 import React from 'react';
-import SignInSide from '../src/SignInSide';
+import IndexPage from '../src/IndexPage';
 
 export default function Index() {
   return (
-    <SignInSide />
+    <IndexPage />
   );
 }

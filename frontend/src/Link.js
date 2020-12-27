@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import MuiLink from '@material-ui/core/Link';
 
 const NextComposed = React.forwardRef(function NextComposed(props, ref) {
   const { as, href, ...other } = props;
@@ -40,13 +39,8 @@ function Link(props) {
     [activeClassName]: router.pathname === pathname && activeClassName,
   });
 
-  if (naked) {
     return <NextComposed className={className} ref={innerRef} href={href} {...other} />;
-  }
 
-  return (
-    <MuiLink component={NextComposed} className={className} ref={innerRef} href={href} {...other} />
-  );
 }
 
 Link.propTypes = {
