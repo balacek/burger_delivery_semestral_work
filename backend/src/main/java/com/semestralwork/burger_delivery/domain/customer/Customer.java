@@ -39,11 +39,22 @@ public class Customer {
     @Column(length = 50)
     private CUSTOMERTYPE customerType;
 
+    @Column
+    private boolean allowNewsletters;
+
     @OneToMany(targetEntity = DeliveryOrder.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_fk", referencedColumnName = "customerId")
     private List<DeliveryOrder> orders;
 
     public Customer() {
+    }
+
+    public boolean isAllowNewsletters() {
+        return allowNewsletters;
+    }
+
+    public void setAllowNewsletters(boolean allowNewsletters) {
+        this.allowNewsletters = allowNewsletters;
     }
 
     public Long getCustomerId() {
@@ -115,7 +126,8 @@ public class Customer {
         if (this == o) return true;
         if (!(o instanceof Customer)) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(getCustomerId(), customer.getCustomerId()) &&
+        return isAllowNewsletters() == customer.isAllowNewsletters() &&
+                Objects.equals(getCustomerId(), customer.getCustomerId()) &&
                 Objects.equals(getName(), customer.getName()) &&
                 Objects.equals(getSurname(), customer.getSurname()) &&
                 Objects.equals(getEmail(), customer.getEmail()) &&
@@ -127,6 +139,6 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCustomerId(), getName(), getSurname(), getEmail(), getPhone(), getPassword(), getCustomerType(), getOrders());
+        return Objects.hash(getCustomerId(), getName(), getSurname(), getEmail(), getPhone(), getPassword(), getCustomerType(), isAllowNewsletters(), getOrders());
     }
 }
