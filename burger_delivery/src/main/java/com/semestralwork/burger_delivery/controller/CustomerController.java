@@ -27,4 +27,9 @@ public class CustomerController {
     public List<Customer> getCustomer(){
         return customerRepository.findAll();
     }
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello(){
+        return "Hello";
+    }
 }
