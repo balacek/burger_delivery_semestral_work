@@ -7,7 +7,7 @@ const banner = () => {
       <img
         alt="banner"
         src="assets/gif/banner.gif"
-        style={{ width: "100%", height: '13em' }}
+        style={{ width: "100%", height: '12em' }}
       />
     </Link>
   );
