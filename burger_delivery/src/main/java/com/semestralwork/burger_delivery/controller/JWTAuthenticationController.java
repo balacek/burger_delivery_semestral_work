@@ -1,7 +1,5 @@
 package com.semestralwork.burger_delivery.controller;
 
-import java.util.Objects;
-
 import com.semestralwork.burger_delivery.config.JWTTokenUtil;
 import com.semestralwork.burger_delivery.dto.JWTRequest;
 import com.semestralwork.burger_delivery.dto.JWTResponse;
@@ -31,6 +29,11 @@ public class JWTAuthenticationController {
 
     @Autowired
     private JWTUserDetailsService userDetailsService;
+
+    /**
+     https://www.javainuse.com/spring/boot-jwt
+     Created JWT security to API authentication from this article provided by javainuse for spring boot security
+     */
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JWTRequest authenticationRequest) throws Exception {
