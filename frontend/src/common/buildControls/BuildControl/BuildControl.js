@@ -19,6 +19,7 @@ const buildControl = (props) => {
             variant="contained"
             style={{ backgroundColor: "#D39952", borderRadius: "40%"}}
             size="medium"
+            onClick={() => props.remove(props.type)}
           >
             <Typography component="h1" variant="h5" style={{ color: "white" }}>
               -

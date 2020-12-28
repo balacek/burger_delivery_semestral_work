@@ -31,7 +31,14 @@ export default function OrderPage() {
       ...ingredients,
       ingredientType
     ])
-    console.log(ingredients)
+  }
+
+  const removeIngredient = (ingredientType) => {
+    const pom = ingredients.slice();
+    pom.splice(ingredients.indexOf(ingredientType), 1);
+    setIngredients([
+      ...pom
+    ])
   }
 
   return (
@@ -40,7 +47,7 @@ export default function OrderPage() {
         <Burger ingredients={ingredients}/>
         </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <BuildControls controls={controls} add={addIngredient}/>
+        <BuildControls controls={controls} add={addIngredient} remove={removeIngredient}/>
       </Grid>
     </Grid>
   );

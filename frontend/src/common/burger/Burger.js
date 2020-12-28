@@ -6,8 +6,6 @@ import useStyles from './Burger_Styles';
 const burger = ( props ) => {
 
     const classes = useStyles();
-    console.log("ahoj")
-    console.log(props.ingredients)
     return (
         <div className={classes.Burger}>
             <BurgerIngredient type="bread-top" />

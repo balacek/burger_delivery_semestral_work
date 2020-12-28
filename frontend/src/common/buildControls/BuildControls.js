@@ -31,7 +31,7 @@ const buildControls = (props) => {
             label={ctrl.label}
             type={ctrl.type}
             add={props.add}
-            removed={() => {}}
+            remove={props.remove}
             disabled={false}
           />
         ))}
