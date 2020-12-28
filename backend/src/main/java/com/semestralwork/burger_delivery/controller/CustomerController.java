@@ -23,18 +23,16 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    CustomerRepository customerRepository;
+
     @RequestMapping(value = "/create-customer", method = RequestMethod.POST)
-    public ResponseEntity<Customer> saveCustomer(@RequestBody CustomerDto customerDto) throws CustomException {
-        return new ResponseEntity<Customer>(customerService.registerCustomer(customerDto), HttpStatus.CREATED);
+    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody CustomerDto customerDto) throws CustomException {
+        return new ResponseEntity<CustomerDto>(customerService.registerCustomer(customerDto), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public List<Customer> getCustomer(){
-        return null;//customerRepository.findAll();
-    }
-
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello(){
-        return "Hello";
+      return customerRepository.findAll();
     }
 }

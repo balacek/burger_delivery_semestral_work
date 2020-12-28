@@ -30,6 +30,14 @@ public class CustomerDto {
         this.allowNesletter = allowNesletter;
     }
 
+    public CustomerDto(Customer customer) {
+        this.name = customer.getName();
+        this.surname = customer.getSurname();
+        this.email = customer.getEmail();
+        this.phone = customer.getPhone();
+        this.allowNesletter = customer.getAllowNewsletters();
+    }
+
     public String getName() {
         return name;
     }

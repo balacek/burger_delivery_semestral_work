@@ -24,7 +24,7 @@ public class Customer {
     @Column(length = 30)
     private String surname;
 
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
     private String email;
 
     @NotNull
@@ -40,7 +40,7 @@ public class Customer {
     private CUSTOMERTYPE customerType;
 
     @Column
-    private boolean allowNewsletters;
+    private Boolean allowNewsletters;
 
     @OneToMany(targetEntity = DeliveryOrder.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_fk", referencedColumnName = "customerId")
@@ -49,11 +49,11 @@ public class Customer {
     public Customer() {
     }
 
-    public boolean isAllowNewsletters() {
+    public Boolean getAllowNewsletters() {
         return allowNewsletters;
     }
 
-    public void setAllowNewsletters(boolean allowNewsletters) {
+    public void setAllowNewsletters(Boolean allowNewsletters) {
         this.allowNewsletters = allowNewsletters;
     }
 
@@ -126,19 +126,19 @@ public class Customer {
         if (this == o) return true;
         if (!(o instanceof Customer)) return false;
         Customer customer = (Customer) o;
-        return isAllowNewsletters() == customer.isAllowNewsletters() &&
-                Objects.equals(getCustomerId(), customer.getCustomerId()) &&
+        return Objects.equals(getCustomerId(), customer.getCustomerId()) &&
                 Objects.equals(getName(), customer.getName()) &&
                 Objects.equals(getSurname(), customer.getSurname()) &&
                 Objects.equals(getEmail(), customer.getEmail()) &&
                 Objects.equals(getPhone(), customer.getPhone()) &&
                 Objects.equals(getPassword(), customer.getPassword()) &&
                 getCustomerType() == customer.getCustomerType() &&
+                Objects.equals(getAllowNewsletters(), customer.getAllowNewsletters()) &&
                 Objects.equals(getOrders(), customer.getOrders());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCustomerId(), getName(), getSurname(), getEmail(), getPhone(), getPassword(), getCustomerType(), isAllowNewsletters(), getOrders());
+        return Objects.hash(getCustomerId(), getName(), getSurname(), getEmail(), getPhone(), getPassword(), getCustomerType(), getAllowNewsletters(), getOrders());
     }
 }
