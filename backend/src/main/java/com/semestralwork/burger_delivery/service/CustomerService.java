@@ -6,6 +6,7 @@ import com.semestralwork.burger_delivery.dto.CustomerDto;
 import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
 import com.semestralwork.burger_delivery.exception.CustomException;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 import javax.transaction.RollbackException;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -43,6 +45,12 @@ public class CustomerService {
         return new CustomerDto(customer);
     }
 
+    public Customer customerDetail(String email){
+        if(StringUtils.isNotBlank(email))
+            return customerRepository.findCustomerByEmail(email).orElse(null);
+        return null;
+    }
+
     private void validateEmail(String email){
         if(!EmailValidator.getInstance().isValid(email))
             throw new CustomException("Email in registration is not valid");
@@ -52,5 +60,9 @@ public class CustomerService {
         Optional<Customer> customerByEmail = customerRepository.findCustomerByEmail(email);
         if(customerByEmail.isPresent())
             throw new CustomException("User with this email already exists");
+    }
+
+    public List<Customer> getAll() {
+        return customerRepository.findAll();
     }
 }
