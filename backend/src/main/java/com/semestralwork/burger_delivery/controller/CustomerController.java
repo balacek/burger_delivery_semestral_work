@@ -27,7 +27,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/customer-detail", method = RequestMethod.GET)
     public ResponseEntity<CustomerDto> customerDetail(@RequestParam String email){
-            customerService.customerDetail(email);
+           return new ResponseEntity<CustomerDto>(new CustomerDto(customerService.customerDetail(email)), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
