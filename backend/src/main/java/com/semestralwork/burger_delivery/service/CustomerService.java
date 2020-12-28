@@ -39,7 +39,7 @@ public class CustomerService {
         customer.setPhone(customerDto.getPhone());
         customer.setPassword(new BCryptPasswordEncoder().encode(customerDto.getPassword()));
         customer.setAllowNewsletters(customerDto.isAllowNesletter());
-        customer.setCustomerType(CUSTOMERTYPE.ADMINISTATOR);
+        customer.setCustomerType(CUSTOMERTYPE.PERSON);
 
         customerRepository.save(customer);
         return new CustomerDto(customer);
