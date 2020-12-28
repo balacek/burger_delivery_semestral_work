@@ -139,7 +139,7 @@ export default function OrderPage() {
         md={5}
         component={Paper}
         elevation={6}
-        style={{ zIndex: "1500" }}
+        style={{ zIndex: "1200" }}
       >
         <BuildControls
           controls={controls}
