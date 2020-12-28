@@ -2,23 +2,68 @@ package com.semestralwork.burger_delivery.dto;
 
 import com.semestralwork.burger_delivery.domain.customer.Customer;
 
+import java.math.BigDecimal;
+
 public class CustomerDto {
 
-    private Customer customer;
+    private String name;
 
+    private String surname;
 
-    public CustomerDto(Customer customer) {
-        this.customer = customer;
-    }
+    private String email;
+
+    private BigDecimal phone;
+
+    private String password;
 
     public CustomerDto() {
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public CustomerDto(String name, String surname, String email, BigDecimal phone, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public BigDecimal getPhone() {
+        return phone;
+    }
+
+    public void setPhone(BigDecimal phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
