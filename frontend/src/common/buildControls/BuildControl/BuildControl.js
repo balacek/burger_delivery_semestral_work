@@ -8,6 +8,7 @@ import useStyles from "./BuildControl_Styles.js";
 
 const buildControl = (props) => {
   const classes = useStyles();
+  console.log(props)
   return (
     <Grid container direction="column" className={classes.BuildControl} alignContent="center">
       <Grid item>
@@ -20,6 +21,7 @@ const buildControl = (props) => {
             style={{ backgroundColor: "#D39952", borderRadius: "40%"}}
             size="medium"
             onClick={() => props.remove(props.type)}
+            disabled={props.ing.length === 0 || props.ing.indexOf(props.type) < 0}
           >
             <Typography component="h1" variant="h5" style={{ color: "white" }}>
               -

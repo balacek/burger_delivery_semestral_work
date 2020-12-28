@@ -33,6 +33,7 @@ const buildControls = (props) => {
             add={props.add}
             remove={props.remove}
             disabled={false}
+            ing={props.ing}
           />
         ))}
       </div>

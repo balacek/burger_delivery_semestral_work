@@ -18,6 +18,7 @@ export default function OrderPage() {
   const classes = useStyles();
 
   const [ingredients, setIngredients] = useState([]);
+  const [counts, setCounts] = useState({})
 
   const controls = [
     { label: "Salad", type: "salad" },
@@ -47,7 +48,7 @@ export default function OrderPage() {
         <Burger ingredients={ingredients}/>
         </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <BuildControls controls={controls} add={addIngredient} remove={removeIngredient}/>
+        <BuildControls controls={controls} ing={ingredients} add={addIngredient} remove={removeIngredient}/>
       </Grid>
     </Grid>
   );
