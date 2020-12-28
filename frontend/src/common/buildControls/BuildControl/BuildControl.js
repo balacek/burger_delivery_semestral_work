@@ -8,6 +8,7 @@ import useStyles from "./BuildControl_Styles.js";
 
 const buildControl = (props) => {
   const classes = useStyles();
+
   return (
     <Grid container direction="column" className={classes.BuildControl} alignContent="center">
       <Grid item>
@@ -29,7 +30,7 @@ const buildControl = (props) => {
         </Grid>
         <Grid item>
           <Typography component="h1" variant="h5" style={{ color: "black" }}>
-            5
+            {props.count[0].count}
           </Typography>
         </Grid>
         <Grid item style={{paddingLeft: '2em' }}>

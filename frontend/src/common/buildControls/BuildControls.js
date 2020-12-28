@@ -34,6 +34,7 @@ const buildControls = (props) => {
             remove={props.remove}
             disabled={false}
             ing={props.ing}
+            count={props.counts.filter(c => c.type === ctrl.type)}
           />
         ))}
       </div>
