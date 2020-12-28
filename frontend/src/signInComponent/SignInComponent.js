@@ -90,6 +90,8 @@ const signInComponent = (props) => {
           fullWidth
           variant="contained"
           color="primary"
+          Component={Link}
+          href="/createOrder"
           className={classes.submit}
         >
           Pokračovat bez přihlášení

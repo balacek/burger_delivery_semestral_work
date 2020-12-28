@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function SignInSide() {
+export default function IndexPage() {
   const classes = useStyles();
 
   return (
