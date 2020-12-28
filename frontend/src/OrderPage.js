@@ -36,20 +36,26 @@ export default function OrderPage() {
     {
       type: "salad",
       count: 0,
+      price: 10
     },
     {
       type: "bacon",
       count: 0,
+      price: 15
     },
     {
       type: "cheese",
       count: 0,
+      price: 8
     },
     {
       type: "meat",
       count: 0,
+      price: 20
     },
   ]);
+
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const controls = [
     { label: "Salad", type: "salad" },
@@ -57,6 +63,15 @@ export default function OrderPage() {
     { label: "Cheese", type: "cheese" },
     { label: "Meat", type: "meat" },
   ];
+
+  const calculateTotalPrice = () => {
+    let pomPrice = 0;
+    counts.forEach(item => {
+      pomPrice += item.count * item.price;
+    })
+    setTotalPrice(pomPrice);
+    console.log(totalPrice)
+  }
 
   const addIngredient = (ingredientType) => {
     setIngredients([...ingredients, ingredientType]);
@@ -67,6 +82,7 @@ export default function OrderPage() {
       }
     });
     setCounts(pom);
+    calculateTotalPrice();
   };
 
   const removeIngredient = (ingredientType) => {
@@ -81,6 +97,7 @@ export default function OrderPage() {
       }
     });
     setCounts(p);
+    calculateTotalPrice();
   };
 
   return (
@@ -111,7 +128,7 @@ export default function OrderPage() {
         </AppBar>
         <Box mt={5} style={{ marginTop: "6em", textAlign: "center" }}>
           <Typography component="h2" variant="h5">
-            Cena: 40
+            {`Cena : ${totalPrice},-`}
           </Typography>
         </Box>
         <Burger ingredients={ingredients} />
