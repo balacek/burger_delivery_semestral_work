@@ -16,15 +16,18 @@ public class CustomerDto {
 
     private String password;
 
+    private boolean allowNesletter;
+
     public CustomerDto() {
     }
 
-    public CustomerDto(String name, String surname, String email, BigDecimal phone, String password) {
+    public CustomerDto(String name, String surname, String email, BigDecimal phone, String password, boolean allowNesletter) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.allowNesletter = allowNesletter;
     }
 
     public String getName() {
@@ -65,5 +68,13 @@ public class CustomerDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAllowNesletter() {
+        return allowNesletter;
+    }
+
+    public void setAllowNesletter(boolean allowNesletter) {
+        this.allowNesletter = allowNesletter;
     }
 }
