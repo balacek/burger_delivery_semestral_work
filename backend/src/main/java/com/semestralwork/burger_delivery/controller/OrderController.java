@@ -22,4 +22,5 @@ public class OrderController {
     public ResponseEntity<List<DeliveryOrder>> getAllOrders(){
         return new ResponseEntity<List<DeliveryOrder>>(orderService.getAllOrders(), HttpStatus.OK);
     }
+
 }

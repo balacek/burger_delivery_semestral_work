@@ -2,6 +2,7 @@ package com.semestralwork.burger_delivery.service;
 
 import com.semestralwork.burger_delivery.domain.customer.Customer;
 import com.semestralwork.burger_delivery.domain.customer.CustomerRepository;
+import com.semestralwork.burger_delivery.domain.order.DeliveryOrder;
 import com.semestralwork.burger_delivery.dto.CustomerDto;
 import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
 import com.semestralwork.burger_delivery.exception.CustomException;
@@ -28,8 +29,7 @@ public class CustomerService {
 
     @Transactional(rollbackOn = Exception.class)
     public CustomerDto registerCustomer(CustomerDto customerDto) throws CustomException {
-
-        customerExists(customerDto.getEmail());
+        customerExistsRegistration(customerDto.getEmail());
         validateEmail(customerDto.getEmail());
 
         Customer customer = new Customer();
@@ -45,24 +45,32 @@ public class CustomerService {
         return new CustomerDto(customer);
     }
 
-    public Customer customerDetail(String email){
-        if(StringUtils.isNotBlank(email))
+    public Customer customerDetail(String email) {
+        if (StringUtils.isNotBlank(email))
             return customerRepository.findCustomerByEmail(email).orElse(null);
         return null;
     }
 
-    private void validateEmail(String email){
-        if(!EmailValidator.getInstance().isValid(email))
+    private void validateEmail(String email) {
+        if (!EmailValidator.getInstance().isValid(email))
             throw new CustomException("Email in registration is not valid");
     }
 
-    private void customerExists(String email){
+    private void customerExistsRegistration(String email) {
         Optional<Customer> customerByEmail = customerRepository.findCustomerByEmail(email);
-        if(customerByEmail.isPresent())
-            throw new CustomException("User with this email already exists");
+        if (customerByEmail.isPresent())
+            throw new CustomException("Customer with this email already exists!");
+    }
+
+    private Customer getCustomer(String email) throws CustomException {
+        return customerRepository.findCustomerByEmail(email).orElseThrow(() -> new CustomException("Customer does not exists!"));
     }
 
     public List<Customer> getAll() {
         return customerRepository.findAll();
+    }
+
+    public List<DeliveryOrder> getCustomerOrders(String email) {
+        return getCustomer(email).getOrders();
     }
 }
