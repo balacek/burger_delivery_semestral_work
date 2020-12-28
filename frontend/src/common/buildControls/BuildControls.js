@@ -45,6 +45,7 @@ const buildControls = (props) => {
           focusVisibleClassName={classes.focusVisible}
           style={{
             width: '100%',
+            height: '12em'
           }}
         >
           <span
@@ -66,7 +67,7 @@ const buildControls = (props) => {
             </Typography>
           </span>
         </ButtonBase>
-      <Box mt={5}>
+      <Box mt={4}>
         <Copyright />
       </Box>
     </div>

@@ -9,10 +9,14 @@ import useStyles from "./BuildControl_Styles.js";
 const buildControl = (props) => {
   const classes = useStyles();
 
+  const imageUrl = `assets/images/${props.type}.png`;
   return (
     <Grid container direction="column" className={classes.BuildControl} alignContent="center">
       <Grid item>
-        <div className={classes.Label}>{props.label}</div>
+        <div className={classes.Label} style={{display: 'inline-flex', justifyContent: 'center', alignItems: 'center'}}>
+          {props.label}
+          <img alt={props.type} src={imageUrl} style={{width: '45px', paddingLeft: '0.5em'}}/>
+        </div>
       </Grid>
       <Grid container justify="center" alignItems="center" >
         <Grid item style={{paddingRight: '2em' }}>

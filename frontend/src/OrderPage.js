@@ -58,10 +58,10 @@ export default function OrderPage() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const controls = [
-    { label: "Salad", type: "salad" },
-    { label: "Bacon", type: "bacon" },
-    { label: "Cheese", type: "cheese" },
-    { label: "Meat", type: "meat" },
+    { label: "Salát", type: "salad" },
+    { label: "Slanina", type: "bacon" },
+    { label: "Sýr", type: "cheese" },
+    { label: "Maso", type: "meat" },
   ];
 
   const calculateTotalPrice = () => {
