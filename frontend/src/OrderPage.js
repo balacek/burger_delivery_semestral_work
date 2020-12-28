@@ -10,7 +10,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import Person from "@material-ui/icons/Person";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 
 import BuildControls from "./common/buildControls/BuildControls";
 import Burger from "./common/burger/Burger";
@@ -32,23 +32,24 @@ export default function OrderPage() {
   };
 
   const [ingredients, setIngredients] = useState([{}]);
-  const [counts, setCounts] = useState(
-    [{ 
-      type: 'salad',
-      count: 0
+  const [counts, setCounts] = useState([
+    {
+      type: "salad",
+      count: 0,
     },
-    { 
-      type: 'bacon',
-      count: 0
+    {
+      type: "bacon",
+      count: 0,
     },
-    { 
-      type: 'cheese',
-      count: 0
+    {
+      type: "cheese",
+      count: 0,
     },
-    { 
-      type: 'meat',
-      count: 0
-    }]);
+    {
+      type: "meat",
+      count: 0,
+    },
+  ]);
 
   const controls = [
     { label: "Salad", type: "salad" },
@@ -60,11 +61,11 @@ export default function OrderPage() {
   const addIngredient = (ingredientType) => {
     setIngredients([...ingredients, ingredientType]);
     let pom = counts.slice();
-    pom.forEach((obj => {
-      if(obj.type === ingredientType){
+    pom.forEach((obj) => {
+      if (obj.type === ingredientType) {
         obj.count++;
       }
-    }))
+    });
     setCounts(pom);
   };
 
@@ -74,11 +75,11 @@ export default function OrderPage() {
     setIngredients([...pom]);
 
     let p = counts.slice();
-    p.forEach((obj => {
-      if(obj.type === ingredientType){
+    p.forEach((obj) => {
+      if (obj.type === ingredientType) {
         obj.count--;
       }
-    }))
+    });
     setCounts(p);
   };
 
@@ -86,33 +87,34 @@ export default function OrderPage() {
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7} direction="row-reverse">
         <AppBar position="fixed" elevation={0} color="primary">
-          <Toolbar disableGutters style={{marginLeft: '5em'}}>
+          <Toolbar disableGutters style={{ marginLeft: "5em" }}>
+          <Button
+                variant="contained"
+                color="secondary"
+                startIcon={<Person />}
+                size="large"
+                component={Link}
+                href="/"
+              >
+                Přihlásit
+              </Button>
             <Tabs
               value={tabIndex}
               onChange={handleTabClick}
-              classes={{ indicator: classes.Indicator }}
+              style={{marginLeft: '2em'}}
             >
+             
               <Tab label="Burger" disableRipple component={Link} href="" />
               <Tab label="Objednávky" disableRipple component={Link} href="" />
             </Tabs>
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<Person />}
-              size="large"
-              style={{marginLeft: '15em'}}
-            >
-              Přihlásit
-            </Button>
           </Toolbar>
         </AppBar>
-        <Box mt={5} style={{marginTop: '6em', textAlign: 'center'}}>
-        <Typography component="h2" variant="h5" >
-          Cena: 40
-        </Typography>
+        <Box mt={5} style={{ marginTop: "6em", textAlign: "center" }}>
+          <Typography component="h2" variant="h5">
+            Cena: 40
+          </Typography>
         </Box>
         <Burger ingredients={ingredients} />
-        
       </Grid>
       <Grid
         item
