@@ -8,7 +8,6 @@ import useStyles from "./BuildControl_Styles.js";
 
 const buildControl = (props) => {
   const classes = useStyles();
-  console.log(props)
   return (
     <Grid container direction="column" className={classes.BuildControl} alignContent="center">
       <Grid item>
