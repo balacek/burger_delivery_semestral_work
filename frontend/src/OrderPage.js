@@ -70,7 +70,6 @@ export default function OrderPage() {
       pomPrice += item.count * item.price;
     })
     setTotalPrice(pomPrice);
-    console.log(totalPrice)
   }
 
   const addIngredient = (ingredientType) => {
