@@ -120,8 +120,8 @@ export default function OrderPage() {
               style={{marginLeft: '2em'}}
             >
              
-              <Tab label="Burger" disableRipple component={Link} href="" />
-              <Tab label="Objednávky" disableRipple component={Link} href="" />
+              <Tab label="Burger" disableRipple component={Link} href="/createOrder" />
+              <Tab label="Objednávky" disableRipple component={Link} href="/listOfOrders" />
             </Tabs>
           </Toolbar>
         </AppBar>
