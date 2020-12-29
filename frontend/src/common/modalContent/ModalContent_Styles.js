@@ -1,17 +1,32 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-    modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-  }));
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+  paper: {
+    margin: theme.spacing(1, 4, 1, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: theme.palette.background.paper
+  },
+  textfield: {
+    margin: theme.spacing(1),
+  },
+  submit: {
+    height: "3.5em",
+    margin: theme.spacing(1, 0, 2),
+  },
+  back: {
+    margin: theme.spacing(1, 0, 2),
+  },
+}));
 
-  export default useStyles;
+export default useStyles;

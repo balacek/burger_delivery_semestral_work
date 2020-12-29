@@ -98,7 +98,7 @@ const buildControls = (props) => {
         }}
       >
         <Fade in={open}>
-          <ModalContent />
+          <ModalContent close={() => setOpen(false)}/>
         </Fade>
       </Modal>
 
