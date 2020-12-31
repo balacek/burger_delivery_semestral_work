@@ -1,7 +1,6 @@
 package com.semestralwork.burger_delivery.domain.ingredient;
 
 import com.semestralwork.burger_delivery.domain.burger.Burger;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
