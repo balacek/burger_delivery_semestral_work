@@ -9,7 +9,8 @@ import Typography from "@material-ui/core/Typography";
 
 import Banner from "./common/banner";
 import OrderTable from "./orderTable/OrderTable";
-import Copyright from './common/copyRight';
+import Copyright from "./common/copyRight";
+import OrderDetail from "./common/orderDetail/OrderDetail";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,36 @@ const useStyles = makeStyles((theme) => ({
 
 const orders = () => {
   const classes = useStyles();
+
+  const customerOrder = {
+    price: 154,
+    status: "DELIVERED",
+    adress: {
+      city: "Praha",
+      street: "Jizeraska 390",
+      postalCode: 40011,
+    },
+    burgers: [
+      {
+        name: "Hovezi burger",
+        ingredients: [
+          { amount: 3, type: "salad" },
+          { amount: 2, type: "bacon" },
+          { amount: 0, type: "cheese" },
+          { amount: 9, type: "meat" },
+        ],
+      },
+      {
+        name: "Kureci burger",
+        ingredients: [
+          { amount: 1, type: "salad" },
+          { amount: 1, type: "bacon" },
+          { amount: 8, type: "cheese" },
+          { amount: 0, type: "meat" },
+        ],
+      },
+    ],
+  };
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7}>
@@ -36,7 +67,7 @@ const orders = () => {
         md={5}
         component={Paper}
         elevation={6}
-        style={{ zIndex: "1300", textAlign: 'center' }}
+        style={{ zIndex: "1300", textAlign: "center" }}
         square
       >
         <Banner />
@@ -50,7 +81,10 @@ const orders = () => {
             src="assets/svg/burger.svg"
           />
         </div>
-        <Box mt={2}>
+        <Grid item justify="center">
+          <OrderDetail order={customerOrder} />
+        </Grid>
+        <Box mt={3} style={{marginBottom: '2.5em'}}>
           <Copyright />
         </Box>
       </Grid>
