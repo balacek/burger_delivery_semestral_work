@@ -17,7 +17,7 @@ const modalContent = (props) => {
     <div className={classes.paper}>
       <div style={{ display: "inline-flex" }}>
         <Typography component="h1" variant="h5" style={{ margin: "auto" }}>
-          Přihlásit se
+          Objednat
         </Typography>
         <Avatar
           className={classes.avatar}
@@ -34,6 +34,7 @@ const modalContent = (props) => {
             id="name"
             label="Jméno"
             name="name"
+            required
             autoFocus
             className={classes.textfield}
           />
@@ -51,8 +52,17 @@ const modalContent = (props) => {
           <TextField
             variant="outlined"
             margin="normal"
+            name="tel"
+            label="Telefon"
+            type="tel"
             required
-            name="email"
+            id="tel"
+            className={classes.textfield}
+          />
+           <TextField
+            variant="outlined"
+            margin="normal"
+            name="tel"
             label="Email"
             type="text"
             id="email"
@@ -61,49 +71,58 @@ const modalContent = (props) => {
           <TextField
             variant="outlined"
             margin="normal"
+            name="tel"
+            label="Ulice"
             required
-            name="password"
-            label="Heslo"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            type="text"
+            id="street"
             className={classes.textfield}
           />
           <TextField
             variant="outlined"
             margin="normal"
             name="tel"
-            label="Telefon"
-            type="tel"
-            id="tel"
+            label="Město"
+            required
+            type="text"
+            id="city"
             className={classes.textfield}
           />
-        </div>
-        <FormControlLabel
-          control={<Checkbox value="remember" color="secondary" />}
-          label="Souhlasím se zpracováním osobních údajů"
-        />
-        <FormControlLabel
+          <TextField
+            variant="outlined"
+            margin="normal"
+            name="tel"
+            label="PSČ"
+            required
+            type="tel"
+            id="postalCode"
+            className={classes.textfield}
+          />
+          <div>
+           <FormControlLabel
           control={<Checkbox value="remember" color="secondary" checked />}
-          label="Zasílat novinky o změnách"
-        />
+          label="Zasílat novinky o změnách"/>
+          </div>
+          <div style={{display: 'inline-grid', width: '250px', marginBottom: '1.5em'}}>
         <Button
           type="submit"
-          fullWidth
           variant="contained"
           color="secondary"
           className={classes.submit}
         >
-          Registrovat
+          Objednat
         </Button>
         <Button
           type="back"
-          fullWidth
           variant="contained"
           color="primary"
-          className={classes.back}
-          onClick={() => props.changeStepCallback(1)}
-        ></Button>
+          onClick={(e) => {
+            e.preventDefault();
+            props.close(false)
+          }}
+        >Zpět</Button>
+        </div>
+        </div>
       </form>
     </div>
   );

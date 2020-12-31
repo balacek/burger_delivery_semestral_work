@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    maxWidth: '65%',
+    borderRadius: '20px'
   },
   textfield: {
     margin: theme.spacing(1),
