@@ -22,7 +22,6 @@ const registerComponent = (props) => {
 
   const createAccount = (e) => {
     e.preventDefault()
-    console.log("jsem tu")
     axios.post("http://localhost:8080/api/customer/create-customer", {
       name: name,
       surname: surname,

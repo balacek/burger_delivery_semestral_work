@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -12,6 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Copyright from "../common/copyRight";
 import {connect} from "react-redux";
+import axios from 'axios';
+import Router from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,6 +38,19 @@ const useStyles = makeStyles((theme) => ({
 
 const signInComponent = (props) => {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signIn = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:8080/authenticate", {
+      username: email,
+      password: password
+    }).then(res => {
+      props.setToken(res.data.token);
+      Router.push('/createOrder');
+    }, (error) => console.log(error))
+  }
 
   return (
     <div className={classes.paper}>
@@ -61,6 +76,7 @@ const signInComponent = (props) => {
           name="email"
           autoComplete="email"
           autoFocus
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           variant="outlined"
@@ -71,6 +87,7 @@ const signInComponent = (props) => {
           label="Password"
           type="password"
           id="password"
+          onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
         />
         <FormControlLabel
@@ -83,10 +100,7 @@ const signInComponent = (props) => {
           variant="contained"
           color="secondary"
           className={classes.submit}
-          onClick={(e) => {
-            e.preventDefault();
-            props.setToken('tokendavida')
-          }}
+          onClick={signIn}
         >
           Přihlásit se
         </Button>
