@@ -7,8 +7,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import Person from "@material-ui/icons/Person";
+import {connect} from 'react-redux';
 
-const appBar = () => {
+const appBar = (props) => {
   const [tabIndex, setTabIndex] = useState(1);
 
   const handleTabClick = (_, index) => {
@@ -25,8 +26,9 @@ const appBar = () => {
           size="large"
           component={Link}
           href="/"
-        >
-          Přihlásit
+          onClick={() => props.logout()}
+          >
+            { props.token ? 'Odhlásit se' : 'Přihlásit se'}
         </Button>
         <Tabs
           value={tabIndex}
@@ -51,4 +53,18 @@ const appBar = () => {
   );
 };
 
-export default appBar;
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: (token) => dispatch({
+      type: 'LOGOUT'
+    })
+  }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.token
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(appBar);

@@ -15,14 +15,15 @@ import Typography from "@material-ui/core/Typography";
 import BuildControls from "./common/buildControls/BuildControls";
 import Burger from "./common/burger/Burger";
 import { Box } from "@material-ui/core";
+import {connect} from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
-  },
+  }
 }));
 
-export default function OrderPage() {
+function OrderPage(props) {
   const classes = useStyles();
 
   const [tabIndex, setTabIndex] = useState(0);
@@ -111,8 +112,9 @@ export default function OrderPage() {
                 size="large"
                 component={Link}
                 href="/"
+                onClick={() => props.logout()}
               >
-                Přihlásit
+                { props.token ? 'Odhlásit se' : 'Přihlásit se'}
               </Button>
             <Tabs
               value={tabIndex}
@@ -152,3 +154,19 @@ export default function OrderPage() {
     </Grid>
   );
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: (token) => dispatch({
+      type: 'LOGOUT'
+    })
+  }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.token
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderPage);
