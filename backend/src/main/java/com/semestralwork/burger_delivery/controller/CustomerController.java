@@ -27,7 +27,8 @@ public class CustomerController {
         return new ResponseEntity<CustomerDto>(customerService.registerCustomer(customerDto), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/customer/customer-detail", method = RequestMethod.GET)
+    //can acces only via bearer token
+    @RequestMapping(value = "/customer-detail", method = RequestMethod.GET)
     public ResponseEntity<CustomerDto> customerDetail(@RequestParam String email){
            return new ResponseEntity<CustomerDto>(new CustomerDto(customerService.customerDetail(email)), HttpStatus.OK);
     }

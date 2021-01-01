@@ -62,7 +62,7 @@ public class CustomerService {
             throw new CustomException("Customer with this email already exists!");
     }
 
-    private Customer getCustomer(String email) throws CustomException {
+    public Customer getCustomer(String email) throws CustomException {
         return customerRepository.findCustomerByEmail(email).orElseThrow(() -> new CustomException("Customer does not exists!"));
     }
 

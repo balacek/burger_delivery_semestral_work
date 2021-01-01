@@ -2,6 +2,9 @@ package com.semestralwork.burger_delivery.service;
 
 import java.util.ArrayList;
 
+import com.semestralwork.burger_delivery.domain.customer.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,13 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class JWTUserDetailsService implements UserDetailsService {
 
+    @Autowired
+    CustomerService customerService;
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("customer".equals(username)) {
-            return new User("customer", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
-                    new ArrayList<>());
-        } else {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Customer customer = customerService.getCustomer(email);
+        return new User(customer.getEmail(), customer.getPassword(), new ArrayList<>());
     }
 }

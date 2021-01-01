@@ -38,7 +38,7 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     @Column(length = 50)
     private CUSTOMERTYPE customerType;
-b
+
     @Column
     private Boolean allowNewsletters;
 
