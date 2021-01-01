@@ -5,6 +5,7 @@ import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;

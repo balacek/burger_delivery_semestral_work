@@ -3,6 +3,7 @@ package com.semestralwork.burger_delivery.domain.burger;
 import com.semestralwork.burger_delivery.domain.ingredient.Ingredient;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,12 +17,17 @@ public class Burger {
     @Column(length = 50)
     private String burgerName;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "ingredient_fk", joinColumns = @JoinColumn(name = "ingredientId"),
             inverseJoinColumns = @JoinColumn(name = "burgerId"))
     List<Ingredient> ingredients;
 
     public Burger() {
+    }
+
+    public Burger(String burgerName, List<Ingredient> ingredients) {
+        this.burgerName = burgerName;
+        this.ingredients = ingredients;
     }
 
     public Long getBurgerId() {

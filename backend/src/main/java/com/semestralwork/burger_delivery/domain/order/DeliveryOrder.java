@@ -6,6 +6,7 @@ import com.semestralwork.burger_delivery.enums.ORDERSTATE;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public class DeliveryOrder {
     @Column
     private BigDecimal totalPrice;
 
-    @ManyToOne(targetEntity = Adress.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Adress.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "adress_fk", referencedColumnName = "adressId")
     private Adress adress;
 
@@ -38,6 +39,11 @@ public class DeliveryOrder {
     private List<Burger> burgers;
 
     public DeliveryOrder() {
+    }
+
+    public DeliveryOrder(BigDecimal totalPrice, Adress adress) {
+        this.totalPrice = totalPrice;
+        this.adress = new Adress(adress.getStreet(), adress.getCity(), adress.getPostalCode());
     }
 
     public Long getOrderId() {
