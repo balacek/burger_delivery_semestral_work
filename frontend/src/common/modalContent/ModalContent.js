@@ -116,8 +116,8 @@ const modalContent = (props) => {
           />
           <div>
            <FormControlLabel
-          control={<Checkbox value="remember" color="secondary" checked />}
-          label="Zasílat novinky o změnách"  onChange={ () => setAllowNewsletter(!allowNewsletter)} />
+          control={<Checkbox value="remember" color="secondary" checked={allowNewsletter}  onChange={ () => setAllowNewsletter(!allowNewsletter)} />}
+          label="Zasílat novinky o změnách" />
           </div>
           <div style={{display: 'inline-grid', width: '250px', marginBottom: '1.5em'}}>
         <Button

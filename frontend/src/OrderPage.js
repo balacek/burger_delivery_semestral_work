@@ -102,6 +102,8 @@ function OrderPage(props) {
   };
 
   const createBurgrOrder = (address) => {
+    console.log(ingredients);
+    console.log(address);
     var count = {};
     ingredients.forEach(function(i) { count[i] = (count[i]||0) + 1;});
 
