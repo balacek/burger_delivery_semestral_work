@@ -88,7 +88,7 @@ export default function orderDetail(props) {
             );
           })
         : null}
-      {props.isAdmin ? (
+      {props.isAdmin && props.order ? (
         <Button
           type="submit"
           variant="contained"
@@ -96,6 +96,7 @@ export default function orderDetail(props) {
           style={{ marginTop: "1em" }}
           onClick={(e) => {
             e.preventDefault();
+            props.orderDeliveredCallback();
           }}
         >
           Označit objednávku za vyřízenou

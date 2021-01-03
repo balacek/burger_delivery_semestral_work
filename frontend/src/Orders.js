@@ -30,8 +30,9 @@ const orders = (props) => {
 
   const [listOR, setlistOR] = useState();
   const [customerOrder, setCustomerOrder] = useState();
+  const [lastId, setLastId] = useState();
 
-  useEffect(() => {
+  const loadData = () => {
     if (props.customerType === "ADMINISTATOR") {
       axious
         .get(`http://localhost:8080/api/orders`, {
@@ -59,16 +60,33 @@ const orders = (props) => {
           (err) => console.log(err)
         );
     }
+  }
+
+  useEffect(() => {
+    loadData();
   }, []);
 
-  const showOrderDetail = (id) => {
-    console.log(id);
-    console.log(listOR);
+  const setOrderAsDelivered = () => {
+    axious
+      .post(`http://localhost:8080/api/order-delivered?orderId=${lastId}`,{}, {
+        headers: {
+          Authorization: "Bearer " + props.token, //the token is a variable which holds the token
+        }
+      })
+      .then(
+        (res) => {
+          setCustomerOrder(undefined);
 
+          loadData();
+        },
+        (err) => console.log(err)
+      );
+  };
+
+  const showOrderDetail = (id) => {
     const item = listOR.filter((i) => i.orderId === id);
 
-    console.log(item[0])
-
+    setLastId(id);
     setCustomerOrder({
       price: item[0].totalPrice,
       status: item[0].orderstate,
@@ -80,9 +98,9 @@ const orders = (props) => {
       burgers: [
         {
           name: item[0].burgers[0].burgerName,
-          ingredients: item[0].burgers[0].ingredients
-        }
-      ]
+          ingredients: item[0].burgers[0].ingredients,
+        },
+      ],
     });
   };
 
@@ -113,7 +131,11 @@ const orders = (props) => {
           />
         </div>
         <Grid item justify="center">
-          <OrderDetail order={customerOrder} isAdmin={props.customerType === "ADMINISTATOR"}/>
+          <OrderDetail
+            order={customerOrder}
+            isAdmin={props.customerType === "ADMINISTATOR"}
+            orderDeliveredCallback={setOrderAsDelivered}
+          />
         </Grid>
         <Box mt={3} style={{ marginBottom: "2.5em" }}>
           <Copyright />
