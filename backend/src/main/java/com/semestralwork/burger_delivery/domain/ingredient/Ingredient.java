@@ -21,7 +21,7 @@ public class Ingredient {
     private long price;
 
     @Column
-    private int amount;
+    private Integer amount;
 
     @NotNull
     @Column(length = 150)
@@ -68,11 +68,11 @@ public class Ingredient {
         this.price = price;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
