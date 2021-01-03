@@ -1,6 +1,7 @@
 package com.semestralwork.burger_delivery.dto;
 
 import com.semestralwork.burger_delivery.domain.customer.Customer;
+import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
 
 import java.math.BigDecimal;
 
@@ -20,6 +21,8 @@ public class CustomerDto {
 
     private boolean allowNesletter;
 
+    private CUSTOMERTYPE customerType;
+
     public CustomerDto() {
     }
 
@@ -38,6 +41,7 @@ public class CustomerDto {
         this.email = customer.getEmail();
         this.phone = customer.getPhone();
         this.allowNesletter = customer.getAllowNewsletters();
+        this.customerType = customer.getCustomerType();
     }
 
     public String getName() {
@@ -96,6 +100,14 @@ public class CustomerDto {
         this.id = id;
     }
 
+    public CUSTOMERTYPE getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CUSTOMERTYPE customerType) {
+        this.customerType = customerType;
+    }
+
     @Override
     public String toString() {
         return "CustomerDto{" +
@@ -106,6 +118,7 @@ public class CustomerDto {
                 ", phone=" + phone +
                 ", password='" + password + '\'' +
                 ", allowNesletter=" + allowNesletter +
+                ", customerType=" + customerType +
                 '}';
     }
 }
