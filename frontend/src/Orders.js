@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 const orders = (props) => {
   const classes = useStyles();
 
-  const [orders, setOrders] = useState();
+  const [listOR, setlistOR] = useState();
 
   useEffect(() => {
     if(props.customerType === "ADMINISTATOR"){
@@ -36,14 +36,17 @@ const orders = (props) => {
         headers: {
           Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
         }}).then(res => {
-            setOrders(res)
+          console.log('zde')
+          console.log(res)
+              setlistOR(res.data)
         }, (err) => console.log(err))
     }else{
       axious.get(`http://localhost:8080/api/customer-orders?email=${props.email}`, {
       headers: {
         Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
       }}).then(res => {
-          setOrders(res)
+        console.log("tady")
+          setlistOR(res.data)
       }, (err) => console.log(err))
     }
 
@@ -81,7 +84,7 @@ const orders = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7}>
-        <OrderTable />
+        <OrderTable listOrders={listOR}/>
       </Grid>
       <Grid
         item
