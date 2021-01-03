@@ -43,7 +43,7 @@ function OrderPage(props) {
        })
       .then(
         (res) => {
-          props.initUser(res.data.id);
+          props.initUser(res.data.id, "ADMINISTATOR");
         },
         (err) => console.log(err)
       );
@@ -244,10 +244,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: "LOGOUT",
       }),
-    initUser: (userId) =>
+    initUser: (userId, customerType) =>
       dispatch({
         type: "INITUSER",
         userId: userId,
+        customerType: customerType
       }),
   };
 };

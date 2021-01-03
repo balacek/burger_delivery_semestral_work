@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -31,12 +31,21 @@ const orders = (props) => {
   const [orders, setOrders] = useState();
 
   useEffect(() => {
-    axious.get(`http://localhost:8080/api/customer-orders?email=${props.email}`, {
+    if(props.customerType === "ADMINISTATOR"){
+      axious.get(`http://localhost:8080/api/orders`, {
+        headers: {
+          Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
+        }}).then(res => {
+            setOrders(res)
+        }, (err) => console.log(err))
+    }else{
+      axious.get(`http://localhost:8080/api/customer-orders?email=${props.email}`, {
       headers: {
         Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
       }}).then(res => {
           setOrders(res)
       }, (err) => console.log(err))
+    }
 
  }, []);
 
@@ -110,7 +119,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     userId: state.userId,
-    email: state.email
+    email: state.email,
+    customerType: state.customerType
   };
 };
 

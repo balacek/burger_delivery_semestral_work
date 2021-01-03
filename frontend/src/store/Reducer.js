@@ -1,7 +1,8 @@
 let inicialState = {
   token: undefined,
   email: undefined,
-  userId: undefined
+  userId: undefined,
+  customerType: undefined
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -21,6 +22,7 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         userId: action.userId,
+        customerType: action.customerType
       };
     default:
       return state;
