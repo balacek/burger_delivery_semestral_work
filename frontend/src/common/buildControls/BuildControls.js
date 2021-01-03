@@ -98,7 +98,7 @@ const buildControls = (props) => {
         }}
       >
         <Fade in={open}>
-          <ModalContent close={() => setOpen(false)}/>
+          <ModalContent createOrderCallback={props.createOrderCallback} close={() => setOpen(false)}/>
         </Fade>
       </Modal>
 

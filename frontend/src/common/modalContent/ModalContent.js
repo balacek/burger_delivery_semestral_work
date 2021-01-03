@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
 import useStyles from "./ModalContent_Styles";
 
 const modalContent = (props) => {
   const classes = useStyles();
+
+  const [name, setName] = useState('');
+  const [surname,setSurname] = useState('');
+  const [phone, setPhone] = useState();
+  const [email, setEmail] = useState('');
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [psc, setPsc] = useState();
+  const [allowNewsletter, setAllowNewsletter] = useState(true);
+
 
   return (
     <div className={classes.paper}>
@@ -36,6 +45,7 @@ const modalContent = (props) => {
             name="name"
             required
             autoFocus
+            onChange={ (e) => setName(e.target.value)} 
             className={classes.textfield}
           />
 
@@ -47,6 +57,7 @@ const modalContent = (props) => {
             label="Příjmení"
             type="text"
             id="surname"
+            onChange={ (e) => setSurname(e.target.value)} 
             className={classes.textfield}
           />
           <TextField
@@ -57,6 +68,7 @@ const modalContent = (props) => {
             type="tel"
             required
             id="tel"
+            onChange={ (e) => setPhone(e.target.value)} 
             className={classes.textfield}
           />
            <TextField
@@ -66,6 +78,7 @@ const modalContent = (props) => {
             label="Email"
             type="text"
             id="email"
+            onChange={ (e) => setEmail(e.target.value)} 
             className={classes.textfield}
           />
           <TextField
@@ -76,6 +89,7 @@ const modalContent = (props) => {
             required
             type="text"
             id="street"
+            onChange={ (e) => setStreet(e.target.value)} 
             className={classes.textfield}
           />
           <TextField
@@ -86,6 +100,7 @@ const modalContent = (props) => {
             required
             type="text"
             id="city"
+            onChange={ (e) => setCity(e.target.value)} 
             className={classes.textfield}
           />
           <TextField
@@ -96,12 +111,13 @@ const modalContent = (props) => {
             required
             type="tel"
             id="postalCode"
+            onChange={ (e) => setPsc(e.target.value)} 
             className={classes.textfield}
           />
           <div>
            <FormControlLabel
           control={<Checkbox value="remember" color="secondary" checked />}
-          label="Zasílat novinky o změnách"/>
+          label="Zasílat novinky o změnách"  onChange={ () => setAllowNewsletter(!allowNewsletter)} />
           </div>
           <div style={{display: 'inline-grid', width: '250px', marginBottom: '1.5em'}}>
         <Button
@@ -109,6 +125,20 @@ const modalContent = (props) => {
           variant="contained"
           color="secondary"
           className={classes.submit}
+          onClick={(e) => {
+              e.preventDefault();
+              const address = {
+                name: name,
+                surname: surname,
+                phone: phone,
+                email: email,
+                street: street,
+                city: city,
+                psc, psc,
+                allowNewsletter: allowNewsletter
+              }
+              props.createOrderCallback(address);
+          }}
         >
           Objednat
         </Button>
@@ -118,7 +148,7 @@ const modalContent = (props) => {
           color="primary"
           onClick={(e) => {
             e.preventDefault();
-            props.close(false)
+            props.close(false);
           }}
         >Zpět</Button>
         </div>

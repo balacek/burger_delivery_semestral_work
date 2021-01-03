@@ -15,12 +15,13 @@ import Typography from "@material-ui/core/Typography";
 import BuildControls from "./common/buildControls/BuildControls";
 import Burger from "./common/burger/Burger";
 import { Box } from "@material-ui/core";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
-  }
+  },
 }));
 
 function OrderPage(props) {
@@ -37,22 +38,22 @@ function OrderPage(props) {
     {
       type: "salad",
       count: 0,
-      price: 10
+      price: 10,
     },
     {
       type: "bacon",
       count: 0,
-      price: 15
+      price: 15,
     },
     {
       type: "cheese",
       count: 0,
-      price: 8
+      price: 8,
     },
     {
       type: "meat",
       count: 0,
-      price: 20
+      price: 20,
     },
   ]);
 
@@ -67,11 +68,11 @@ function OrderPage(props) {
 
   const calculateTotalPrice = () => {
     let pomPrice = 0;
-    counts.forEach(item => {
+    counts.forEach((item) => {
       pomPrice += item.count * item.price;
-    })
+    });
     setTotalPrice(pomPrice);
-  }
+  };
 
   const addIngredient = (ingredientType) => {
     setIngredients([...ingredients, ingredientType]);
@@ -100,30 +101,89 @@ function OrderPage(props) {
     calculateTotalPrice();
   };
 
+  const createBurgrOrder = (address) => {
+    var count = {};
+    ingredients.forEach(function(i) { count[i] = (count[i]||0) + 1;});
+
+    axios.post("http://localhost:8080/api/order/create-order", {
+        name: address.name,
+        surname: address.surname,
+        phone: address.phone,
+        email: address.email,
+        adress: {
+          street: address.street,
+          city: address.city,
+          postalCode: 7878,
+        },
+        burgers: [
+          {
+            burgerName: "pipka",
+            ingredients: [
+              {
+                price: count.salad !== undefined ? count.salad *  10 : 0,
+                amount: count.salad !== undefined ? count.salad : 0,
+                type: "salad",
+              },
+              {
+                price: count.bacon !== undefined ? count.bacon *  15 : 0,
+                amount: count.bacon !== undefined ? count.bacon : 0,
+                type: "bacon",
+              },
+              {
+                price: count.meat !== undefined ? count.meat *  20 : 0,
+                amount: count.meat !== undefined ? count.meat : 0,
+                type: "meat",
+              },
+              {
+                price: count.cheese !== undefined ? count.cheese *  8 : 0,
+                amount: count.cheese !== undefined ? count.cheese : 0,
+                type: "cheese",
+              }
+            ]
+          },
+        ]
+      })
+      .then(
+        (res) => {
+          window.location.reload();
+        },
+        (error) => console.log(error)
+      );
+  };
+
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7} direction="row-reverse">
         <AppBar position="fixed" elevation={0} color="primary">
           <Toolbar disableGutters style={{ marginLeft: "5em" }}>
-          <Button
-                variant="contained"
-                color="secondary"
-                startIcon={<Person />}
-                size="large"
-                component={Link}
-                href="/"
-                onClick={() => props.logout()}
-              >
-                { props.token ? 'Odhlásit se' : 'Přihlásit se'}
-              </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<Person />}
+              size="large"
+              component={Link}
+              href="/"
+              onClick={() => props.logout()}
+            >
+              {props.token ? "Odhlásit se" : "Přihlásit se"}
+            </Button>
             <Tabs
               value={tabIndex}
               onChange={handleTabClick}
-              style={{marginLeft: '2em'}}
+              style={{ marginLeft: "2em" }}
             >
-             
-              <Tab label="Burger" disableRipple component={Link} href="/createOrder" />
-              <Tab label="Objednávky" disableRipple component={Link} href="/listOfOrders" />
+              <Tab
+                label="Burger"
+                disableRipple
+                component={Link}
+                href="/createOrder"
+              />
+              <Tab
+                label="Objednávky"
+                disableRipple
+                component={Link}
+                href="/listOfOrders"
+              />
             </Tabs>
           </Toolbar>
         </AppBar>
@@ -149,24 +209,26 @@ function OrderPage(props) {
           add={addIngredient}
           remove={removeIngredient}
           counts={counts}
+          createOrderCallback={createBurgrOrder}
         />
       </Grid>
     </Grid>
   );
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    logout: (token) => dispatch({
-      type: 'LOGOUT'
-    })
-  }
+    logout: (token) =>
+      dispatch({
+        type: "LOGOUT",
+      }),
+  };
 };
 
 const mapStateToProps = (state) => {
   return {
-    token: state.token
-  }
+    token: state.token,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderPage);
