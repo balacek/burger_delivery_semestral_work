@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 public class CustomerDto {
 
+    private int id;
+
     private String name;
 
     private String surname;
@@ -84,5 +86,26 @@ public class CustomerDto {
 
     public void setAllowNesletter(boolean allowNesletter) {
         this.allowNesletter = allowNesletter;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", password='" + password + '\'' +
+                ", allowNesletter=" + allowNesletter +
+                '}';
     }
 }
