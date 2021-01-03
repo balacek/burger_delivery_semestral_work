@@ -7,7 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
-import axious from 'axios';
+import axious from "axios";
 
 import Banner from "./common/banner";
 import OrderTable from "./orderTable/OrderTable";
@@ -29,62 +29,67 @@ const orders = (props) => {
   const classes = useStyles();
 
   const [listOR, setlistOR] = useState();
+  const [customerOrder, setCustomerOrder] = useState();
 
   useEffect(() => {
-    if(props.customerType === "ADMINISTATOR"){
-      axious.get(`http://localhost:8080/api/orders`, {
-        headers: {
-          Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
-        }}).then(res => {
-          console.log('zde')
-          console.log(res)
-              setlistOR(res.data)
-        }, (err) => console.log(err))
-    }else{
-      axious.get(`http://localhost:8080/api/customer-orders?email=${props.email}`, {
-      headers: {
-        Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
-      }}).then(res => {
-        console.log("tady")
-          setlistOR(res.data)
-      }, (err) => console.log(err))
+    if (props.customerType === "ADMINISTATOR") {
+      axious
+        .get(`http://localhost:8080/api/orders`, {
+          headers: {
+            Authorization: "Bearer " + props.token, //the token is a variable which holds the token
+          },
+        })
+        .then(
+          (res) => {
+            setlistOR(res.data);
+          },
+          (err) => console.log(err)
+        );
+    } else {
+      axious
+        .get(`http://localhost:8080/api/customer-orders?email=${props.email}`, {
+          headers: {
+            Authorization: "Bearer " + props.token, //the token is a variable which holds the token
+          },
+        })
+        .then(
+          (res) => {
+            setlistOR(res.data);
+          },
+          (err) => console.log(err)
+        );
     }
+  }, []);
 
- }, []);
+  const showOrderDetail = (id) => {
+    console.log(id);
+    console.log(listOR);
 
-  const customerOrder = {
-    price: 154,
-    status: "DELIVERED",
-    adress: {
-      city: "Praha",
-      street: "Jizeraska 390",
-      postalCode: 40011,
-    },
-    burgers: [
-      {
-        name: "Hovezi burger",
-        ingredients: [
-          { amount: 3, type: "salad" },
-          { amount: 2, type: "bacon" },
-          { amount: 0, type: "cheese" },
-          { amount: 9, type: "meat" },
-        ],
+    const item = listOR.filter((i) => i.orderId === id);
+
+    console.log(item[0])
+
+    setCustomerOrder({
+      price: item[0].totalPrice,
+      status: item[0].orderstate,
+      adress: {
+        city: item[0].adress.city,
+        street: item[0].adress.street,
+        postalCode: item[0].adress.postalCode,
       },
-      {
-        name: "Kureci burger",
-        ingredients: [
-          { amount: 1, type: "salad" },
-          { amount: 1, type: "bacon" },
-          { amount: 8, type: "cheese" },
-          { amount: 0, type: "meat" },
-        ],
-      },
-    ],
+      burgers: [
+        {
+          name: item[0].burgers[0].burgerName,
+          ingredients: item[0].burgers[0].ingredients
+        }
+      ]
+    });
   };
+
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7}>
-        <OrderTable listOrders={listOR}/>
+        <OrderTable listOrders={listOR} orderClickCallback={showOrderDetail} />
       </Grid>
       <Grid
         item
@@ -108,9 +113,9 @@ const orders = (props) => {
           />
         </div>
         <Grid item justify="center">
-          <OrderDetail order={customerOrder} />
+          <OrderDetail order={customerOrder} isAdmin={props.customerType === "ADMINISTATOR"}/>
         </Grid>
-        <Box mt={3} style={{marginBottom: '2.5em'}}>
+        <Box mt={3} style={{ marginBottom: "2.5em" }}>
           <Copyright />
         </Box>
       </Grid>
@@ -123,7 +128,7 @@ const mapStateToProps = (state) => {
     token: state.token,
     userId: state.userId,
     email: state.email,
-    customerType: state.customerType
+    customerType: state.customerType,
   };
 };
 

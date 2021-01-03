@@ -28,7 +28,7 @@ const orderTable = (props) => {
         <React.Fragment>
             <AppBar />
             <div style={{  marginTop: '80px'}}>
-            <DataGrid rows={pom} autoHeight autoWidth columns={columns} pageSize={8} onRowClick={(e) => console.log(e)}/>
+            <DataGrid rows={pom} autoHeight autoWidth columns={columns} pageSize={8} onRowClick={(e) => props.orderClickCallback(e.row.id)}/>
             </div>
         </React.Fragment>
     )

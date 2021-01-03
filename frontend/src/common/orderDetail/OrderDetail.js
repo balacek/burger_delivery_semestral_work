@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import { Typography } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,72 +20,87 @@ const useStyles = makeStyles((theme) => ({
 export default function orderDetail(props) {
   const classes = useStyles();
 
-  console.log(props);
-
   return (
     <React.Fragment>
-      <Typography style={props.order.status === 'DELIVERED' ? {color: 'green'} : {color: red}}
-        component="h6"
-        variant="h5"
-      >{`Status: ${props.order.status}, Cena: ${props.order.price} Czk`}</Typography>
-      <Typography variant="h5">Adresa: </Typography>
-      <List dense className={classes.root}>
-        <ListItem
-          key={props.order.adress.street}
-          style={{ textAlign: "center" }}
-        >
-          <ListItemText primary={`Ulice: ${props.order.adress.street}`} />
-        </ListItem>
-        <ListItem key={props.order.adress.city} style={{ textAlign: "center" }}>
-          <ListItemText primary={`Město: ${props.order.adress.city}`} />
-        </ListItem>
-        <ListItem
-          key={props.order.adress.postalCode}
-          style={{ textAlign: "center" }}
-        >
-          <ListItemText primary={`PSČ: ${props.order.adress.postalCode}`} />
-        </ListItem>
-      </List>
+      {props.order ? (
+        <React.Fragment>
+          <Typography
+            style={
+              props.order.status === "DELIVERED"
+                ? { color: "green" }
+                : { color: "red" }
+            }
+            component="h6"
+            variant="h5"
+          >{`Status: ${props.order.status}, Cena: ${props.order.price} Czk`}</Typography>
+          <Typography variant="h5">Adresa: </Typography>
+          <List dense className={classes.root}>
+            <ListItem
+              key={props.order.adress.street}
+              style={{ textAlign: "center" }}
+            >
+              <ListItemText primary={`Ulice: ${props.order.adress.street}`} />
+            </ListItem>
+            <ListItem
+              key={props.order.adress.city}
+              style={{ textAlign: "center" }}
+            >
+              <ListItemText primary={`Město: ${props.order.adress.city}`} />
+            </ListItem>
+            <ListItem
+              key={props.order.adress.postalCode}
+              style={{ textAlign: "center" }}
+            >
+              <ListItemText primary={`PSČ: ${props.order.adress.postalCode}`} />
+            </ListItem>
+          </List>
+        </React.Fragment>
+      ) : null}
 
       {
         // N burgereru
       }
-      {props.order.burgers.map((burger) => {
-        return (
-          <React.Fragment>
-            <Typography variant="h5">{`${burger.name}`}</Typography>
-            <List dense className={classes.root}>
-              {burger.ingredients.map((value) => {
-                return (
-                  <ListItem key={value} button style={{textALign: 'center'}}>
-                    <ListItemAvatar>
-                      <Avatar
-                        alt={`Avatar n°${value + 1}`}
-                        src={`assets/images/${value.type}.png`}
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={`Počet: ${value.amount} ks`}
-                    />
-                  </ListItem>
-                );
-              })}
-            </List>
-          
-          </React.Fragment>
-        );
-      })}
+      {props.order
+        ? props.order.burgers.map((burger) => {
+            return (
+              <React.Fragment>
+                <Typography variant="h5">{burger.name != undefined ? `${burger.name}` : '-'}</Typography>
+                <List dense className={classes.root}>
+                  {burger.ingredients.map((value) => {
+                    return (
+                      <ListItem
+                        key={value}
+                        button
+                        style={{ textALign: "center" }}
+                      >
+                        <ListItemAvatar>
+                          <Avatar
+                            alt={`Avatar n°${value + 1}`}
+                            src={`assets/images/${value.type}.png`}
+                          />
+                        </ListItemAvatar>
+                        <ListItemText primary={`Počet: ${value.amount} ks`} />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </React.Fragment>
+            );
+          })
+        : null}
+      {props.isAdmin ? (
         <Button
           type="submit"
           variant="contained"
           color="secondary"
-          style={{marginTop: '1em'}}
+          style={{ marginTop: "1em" }}
           onClick={(e) => {
             e.preventDefault();
           }}
         >
           Označit objednávku za vyřízenou
         </Button>
+      ) : null}
     </React.Fragment>
   );
 }
