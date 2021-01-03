@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -32,6 +32,23 @@ function OrderPage(props) {
   const handleTabClick = (_, index) => {
     setTabIndex(index);
   };
+
+  useEffect(() => {
+    if(props.email !== undefined){
+      
+      axios.get('http://localhost:8080/api/customer-detail',{email: props.email}, {
+        headers: {
+          Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
+        }
+       })
+      .then(
+        (res) => {
+          props.initUser(res.data.id);
+        },
+        (err) => console.log(err)
+      );
+    }
+  }, []);
 
   const [ingredients, setIngredients] = useState([{}]);
   const [counts, setCounts] = useState([
@@ -103,9 +120,12 @@ function OrderPage(props) {
 
   const createBurgrOrder = (address) => {
     var count = {};
-    ingredients.forEach(function(i) { count[i] = (count[i]||0) + 1;});
+    ingredients.forEach(function (i) {
+      count[i] = (count[i] || 0) + 1;
+    });
 
-    axios.post("http://localhost:8080/api/order/create-order", {
+    axios
+      .post("http://localhost:8080/api/order/create-order", {
         name: address.name,
         surname: address.surname,
         phone: address.phone,
@@ -120,28 +140,28 @@ function OrderPage(props) {
             burgerName: "pipka",
             ingredients: [
               {
-                price: count.salad !== undefined ? count.salad *  10 : 0,
+                price: count.salad !== undefined ? count.salad * 10 : 0,
                 amount: count.salad !== undefined ? count.salad : 0,
                 type: "salad",
               },
               {
-                price: count.bacon !== undefined ? count.bacon *  15 : 0,
+                price: count.bacon !== undefined ? count.bacon * 15 : 0,
                 amount: count.bacon !== undefined ? count.bacon : 0,
                 type: "bacon",
               },
               {
-                price: count.meat !== undefined ? count.meat *  20 : 0,
+                price: count.meat !== undefined ? count.meat * 20 : 0,
                 amount: count.meat !== undefined ? count.meat : 0,
                 type: "meat",
               },
               {
-                price: count.cheese !== undefined ? count.cheese *  8 : 0,
+                price: count.cheese !== undefined ? count.cheese * 8 : 0,
                 amount: count.cheese !== undefined ? count.cheese : 0,
                 type: "cheese",
-              }
-            ]
+              },
+            ],
           },
-        ]
+        ],
       })
       .then(
         (res) => {
@@ -178,12 +198,14 @@ function OrderPage(props) {
                 component={Link}
                 href="/createOrder"
               />
-              <Tab
-                label="Objednávky"
-                disableRipple
-                component={Link}
-                href="/listOfOrders"
-              />
+              {props.token ? (
+                <Tab
+                  label="Objednávky"
+                  disableRipple
+                  component={Link}
+                  href="/listOfOrders"
+                />
+              ) : null}
             </Tabs>
           </Toolbar>
         </AppBar>
@@ -222,12 +244,18 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: "LOGOUT",
       }),
+    initUser: (userId) =>
+      dispatch({
+        type: "INITUSER",
+        userId: userId,
+      }),
   };
 };
 
 const mapStateToProps = (state) => {
   return {
     token: state.token,
+    email: state.email,
   };
 };
 

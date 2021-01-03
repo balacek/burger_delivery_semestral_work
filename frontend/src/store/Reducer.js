@@ -1,5 +1,7 @@
 let inicialState = {
   token: undefined,
+  email: undefined,
+  userId: undefined
 };
 
 const rootReducer = (state = inicialState, action) => {
@@ -8,11 +10,17 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         token: action.token,
+        email: action.email,
       };
     case "LOGOUT":
       return {
         ...state,
         token: undefined,
+      };
+    case "INITUSER":
+      return {
+        ...state,
+        userId: action.userId,
       };
     default:
       return state;

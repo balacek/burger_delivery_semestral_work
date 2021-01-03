@@ -47,7 +47,7 @@ const signInComponent = (props) => {
       username: email,
       password: password
     }).then(res => {
-      props.setToken(res.data.token);
+      props.setToken(res.data.token, res.data.username);
       Router.push('/createOrder');
     }, (error) => console.log(error))
   }
@@ -137,9 +137,10 @@ const signInComponent = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setToken: (token) => dispatch({
+    setToken: (token, email) => dispatch({
       type: 'SIGNIN',
-      token: token
+      token: token,
+      email: email
     }),
   }
 };

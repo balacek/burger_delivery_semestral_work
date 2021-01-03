@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,6 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import axious from 'axios';
 
 import Banner from "./common/banner";
 import OrderTable from "./orderTable/OrderTable";
@@ -23,8 +25,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const orders = () => {
+const orders = (props) => {
   const classes = useStyles();
+
+ /* useEffect(() => {
+
+    console.log('jsem tu ')
+    console.log(props.token)
+
+    axious.get('http://localhost:8080')
+
+ }, []);*/
 
   const customerOrder = {
     price: 154,
@@ -92,4 +103,10 @@ const orders = () => {
   );
 };
 
-export default orders;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(orders);
