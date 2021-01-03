@@ -33,6 +33,7 @@ public class Ingredient {
     public Ingredient(Ingredient ingredient) {
         this.price = ingredient.price;
         this.type = ingredient.type;
+        this.amount = ingredient.amount;
     }
 
     public Long getIngredientId() {
