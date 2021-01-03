@@ -23,7 +23,7 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "customer-orders", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer-orders", method = RequestMethod.GET)
     public ResponseEntity<List<DeliveryOrder>> getCustomerOrders(@RequestParam Long customerId){
         return new ResponseEntity<List<DeliveryOrder>>(orderService.getCustomerOrders(customerId), HttpStatus.OK);
     }
