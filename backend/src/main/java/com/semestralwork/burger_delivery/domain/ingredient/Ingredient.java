@@ -18,7 +18,7 @@ public class Ingredient {
 
     @NotNull
     @Column
-    private BigDecimal price;
+    private long price;
 
     @NotNull
     @Column(length = 150)
@@ -36,15 +36,15 @@ public class Ingredient {
         return ingredientId;
     }
 
-    public void setIngredientId(Long ingredientId) {
+    public void setIngredientId(long ingredientId) {
         this.ingredientId = ingredientId;
     }
 
-    public BigDecimal getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

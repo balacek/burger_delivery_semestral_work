@@ -6,19 +6,16 @@ import com.semestralwork.burger_delivery.domain.order.DeliveryOrder;
 import com.semestralwork.burger_delivery.dto.CustomerDto;
 import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
 import com.semestralwork.burger_delivery.exception.CustomException;
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-import javax.transaction.RollbackException;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -72,5 +69,17 @@ public class CustomerService {
 
     public List<DeliveryOrder> getCustomerOrders(String email) {
         return getCustomer(email).getOrders();
+    }
+
+    public Optional<Customer> getCustomerById(Long id){
+        return customerRepository.findById(id);
+    }
+
+    public Optional<Customer> getCustomerByPhoneAndEmail(BigDecimal phone, String email) {
+        return customerRepository.getCustomerByPhoneAndEmail(Long.parseLong(phone.toString()), email);
+    }
+
+    public void saveCustomer(Customer customer){
+        customerRepository.save(customer);
     }
 }

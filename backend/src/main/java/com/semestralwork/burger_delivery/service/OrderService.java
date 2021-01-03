@@ -1,6 +1,7 @@
 package com.semestralwork.burger_delivery.service;
 
 import com.semestralwork.burger_delivery.domain.burger.Burger;
+import com.semestralwork.burger_delivery.domain.customer.Customer;
 import com.semestralwork.burger_delivery.domain.ingredient.Ingredient;
 import com.semestralwork.burger_delivery.domain.order.DeliveryOrder;
 import com.semestralwork.burger_delivery.domain.order.DeliveryOrderRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,9 @@ public class OrderService {
 
     @Autowired
     DeliveryOrderRepository deliveryOrderRepository;
+
+    @Autowired
+    CustomerService customerService;
 
     public List<DeliveryOrder> getAllOrders(){
         return deliveryOrderRepository.findAll();
@@ -36,7 +41,7 @@ public class OrderService {
         checkIfOrderContainsCustomerValues(createOrderDto);
         checkIfOrderContainsAdressValues(createOrderDto);
 
-        //TODO CHECK TOTAL PRICE
+        Customer customer = returnCustomerByIdOrEmailToConnectOrder(createOrderDto);
 
         DeliveryOrder deliveryOrder = new DeliveryOrder(createOrderDto.getTotalPrice(), createOrderDto.getAdress());
 
@@ -49,10 +54,40 @@ public class OrderService {
             burgerList.add(burger);
         });
 
+        deliveryOrder.setTotalPrice(getTotalPrice(createOrderDto));
         deliveryOrder.setBurgers(burgerList);
         deliveryOrder.setOrderstate(ORDERSTATE.PENDING);
 
-        deliveryOrderRepository.save(deliveryOrder);
+        //sign an order to customer if some customer already exist in DB, by ID or email, phone
+        if(customer != null) {
+            List<DeliveryOrder> orders = customer.getOrders();
+            orders.add(deliveryOrder);
+            customer.setOrders(orders);
+            customerService.saveCustomer(customer);
+        }else{
+            deliveryOrderRepository.save(deliveryOrder);
+        }
+    }
+
+    private Customer returnCustomerByIdOrEmailToConnectOrder(CreateOrderDto createOrderDto){
+        Customer customer = null;
+        if(createOrderDto.getCustomerId() != null){
+            customer = customerService.getCustomerById(createOrderDto.getCustomerId()).orElse(null);
+        }else{
+            if(createOrderDto.getPhone() != null && StringUtils.isNotBlank(createOrderDto.getEmail())){
+                    customer = customerService
+                            .getCustomerByPhoneAndEmail(createOrderDto.getPhone(), createOrderDto.getEmail())
+                                .orElse(null);
+            }
+        }
+        return customer;
+    }
+
+    private BigDecimal getTotalPrice(CreateOrderDto createOrderDto){
+        long sum = createOrderDto.getBurgers()
+                .stream().mapToLong(burger -> burger.getIngredients()
+                        .stream().mapToLong(Ingredient::getPrice).sum()).sum();
+        return new BigDecimal(sum);
     }
 
     private void checkIfOrderContainsCustomerValues(CreateOrderDto createOrderDto) throws CustomException{
