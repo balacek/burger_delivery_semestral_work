@@ -35,4 +35,9 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/order-delivered", method = RequestMethod.POST)
+    public ResponseEntity<HttpStatus> orderDelivered(@RequestParam Long orderId){
+        return new ResponseEntity<HttpStatus>(orderService.orderDelivered(orderId), HttpStatus.OK);
+    }
+
 }

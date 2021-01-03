@@ -10,6 +10,7 @@ import com.semestralwork.burger_delivery.enums.ORDERSTATE;
 import com.semestralwork.burger_delivery.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -111,5 +112,13 @@ public class OrderService {
 
     public List<DeliveryOrder> getCustomerOrders(Long customerId) {
         return customerService.getCustomerOrders(customerId);
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public HttpStatus orderDelivered(Long orderId) {
+        DeliveryOrder deliveryOrder = deliveryOrderRepository.getOne(orderId);
+        deliveryOrder.setOrderstate(ORDERSTATE.DELIVERED);
+        deliveryOrderRepository.save(deliveryOrder);
+        return HttpStatus.OK;
     }
 }
