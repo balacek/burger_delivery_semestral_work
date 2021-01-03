@@ -35,7 +35,6 @@ function OrderPage(props) {
 
   useEffect(() => {
     if(props.email !== undefined){
-      
       axios.get(`http://localhost:8080/api/customer-detail?email=${props.email}`, {
         headers: {
           Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
@@ -126,6 +125,7 @@ function OrderPage(props) {
 
     axios
       .post("http://localhost:8080/api/order/create-order", {
+        customerId: props.userId,
         name: address.name,
         surname: address.surname,
         phone: address.phone,
@@ -257,6 +257,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     email: state.email,
+    userId: state.userId
   };
 };
 
