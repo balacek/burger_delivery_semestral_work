@@ -36,7 +36,7 @@ function OrderPage(props) {
   useEffect(() => {
     if(props.email !== undefined){
       
-      axios.get('http://localhost:8080/api/customer-detail',{email: props.email}, {
+      axios.get(`http://localhost:8080/api/customer-detail?email=${props.email}`, {
         headers: {
           Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
         }

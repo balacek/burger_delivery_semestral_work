@@ -28,14 +28,17 @@ const useStyles = makeStyles((theme) => ({
 const orders = (props) => {
   const classes = useStyles();
 
- /* useEffect(() => {
+  const [orders, setOrders] = useState();
 
-    console.log('jsem tu ')
-    console.log(props.token)
+  useEffect(() => {
+    axious.get(`http://localhost:8080/api/customer-orders?email=${props.email}`, {
+      headers: {
+        Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
+      }}).then(res => {
+          setOrders(res)
+      }, (err) => console.log(err))
 
-    axious.get('http://localhost:8080')
-
- }, []);*/
+ }, []);
 
   const customerOrder = {
     price: 154,
@@ -106,7 +109,9 @@ const orders = (props) => {
 const mapStateToProps = (state) => {
   return {
     token: state.token,
+    userId: state.userId,
+    email: state.email
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(orders);
+export default connect(mapStateToProps, null)(orders);
