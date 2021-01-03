@@ -42,7 +42,7 @@ function OrderPage(props) {
        })
       .then(
         (res) => {
-          props.initUser(res.data.id, "ADMINISTATOR");
+          props.initUser(res.data.id, res.data.customerType);
         },
         (err) => console.log(err)
       );
