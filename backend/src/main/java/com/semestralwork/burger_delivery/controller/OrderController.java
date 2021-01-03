@@ -14,12 +14,18 @@ import java.util.List;
 @RequestMapping("/api/order")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderController {
+
     @Autowired
     OrderService orderService;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public ResponseEntity<List<DeliveryOrder>> getAllOrders(){
-        return new ResponseEntity<List<DeliveryOrder>>(orderService.getAllOrders(), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "customer-orders", method = RequestMethod.GET)
+    public ResponseEntity<List<DeliveryOrder>> getCustomerOrders(@RequestParam Long customerId){
+        return new ResponseEntity<List<DeliveryOrder>>(orderService.getCustomerOrders(customerId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/order-detail", method = RequestMethod.GET)

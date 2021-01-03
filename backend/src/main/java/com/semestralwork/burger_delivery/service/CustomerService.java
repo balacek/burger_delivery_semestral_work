@@ -79,6 +79,11 @@ public class CustomerService {
         return customerRepository.getCustomerByPhoneAndEmail(Long.parseLong(phone.toString()), email);
     }
 
+    public List<DeliveryOrder> getCustomerOrders(Long id){
+        Customer customer = customerRepository.findById(id).orElse(null);
+        return customer.getOrders();
+    }
+
     public void saveCustomer(Customer customer){
         customerRepository.save(customer);
     }

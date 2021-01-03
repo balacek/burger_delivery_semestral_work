@@ -109,4 +109,7 @@ public class OrderService {
         }
     }
 
+    public List<DeliveryOrder> getCustomerOrders(Long customerId) {
+        return customerService.getCustomerOrders(customerId);
+    }
 }
