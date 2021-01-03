@@ -43,7 +43,7 @@ public class OrderService {
 
         Customer customer = returnCustomerByIdOrEmailToConnectOrder(createOrderDto);
 
-        DeliveryOrder deliveryOrder = new DeliveryOrder(createOrderDto.getTotalPrice(), createOrderDto.getAdress());
+        DeliveryOrder deliveryOrder = new DeliveryOrder(getTotalPrice(createOrderDto), createOrderDto.getAdress());
 
         List<Burger> burgerList = new ArrayList<>();
 
@@ -54,7 +54,6 @@ public class OrderService {
             burgerList.add(burger);
         });
 
-        deliveryOrder.setTotalPrice(getTotalPrice(createOrderDto));
         deliveryOrder.setBurgers(burgerList);
         deliveryOrder.setOrderstate(ORDERSTATE.PENDING);
 
@@ -65,6 +64,8 @@ public class OrderService {
             customer.setOrders(orders);
             customerService.saveCustomer(customer);
         }else{
+            //TODO create customer
+            //allow nesletters set
             deliveryOrderRepository.save(deliveryOrder);
         }
     }

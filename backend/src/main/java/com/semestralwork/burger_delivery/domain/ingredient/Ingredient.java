@@ -20,6 +20,9 @@ public class Ingredient {
     @Column
     private long price;
 
+    @Column
+    private int amount;
+
     @NotNull
     @Column(length = 150)
     private String type;
@@ -56,18 +59,35 @@ public class Ingredient {
         this.type = type;
     }
 
+    public void setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Ingredient)) return false;
         Ingredient that = (Ingredient) o;
-        return Objects.equals(getIngredientId(), that.getIngredientId()) &&
-                Objects.equals(getPrice(), that.getPrice()) &&
+        return getPrice() == that.getPrice() &&
+                getAmount() == that.getAmount() &&
+                Objects.equals(getIngredientId(), that.getIngredientId()) &&
                 Objects.equals(getType(), that.getType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIngredientId(), getPrice(), getType());
+        return Objects.hash(getIngredientId(), getPrice(), getAmount(), getType());
     }
 }

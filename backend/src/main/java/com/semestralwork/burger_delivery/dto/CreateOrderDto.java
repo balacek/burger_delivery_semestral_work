@@ -19,9 +19,9 @@ public class CreateOrderDto {
     //Adress for delivery
     private Adress adress;
 
-    //Order itself
-    private BigDecimal totalPrice;
     private List<BurgerDto> burgers;
+
+    private boolean allowNews;
 
     public CreateOrderDto() {
     }
@@ -66,20 +66,20 @@ public class CreateOrderDto {
         this.phone = phone;
     }
 
+    public boolean isAllowNews() {
+        return allowNews;
+    }
+
+    public void setAllowNews(boolean allowNews) {
+        this.allowNews = allowNews;
+    }
+
     public Adress getAdress() {
         return adress;
     }
 
     public void setAdress(Adress adress) {
         this.adress = adress;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public List<BurgerDto> getBurgers() {
@@ -99,8 +99,8 @@ public class CreateOrderDto {
                 ", email='" + email + '\'' +
                 ", phone=" + phone +
                 ", adress=" + adress +
-                ", totalPrice=" + totalPrice +
                 ", burgers=" + burgers +
+                ", allowNews=" + allowNews +
                 '}';
     }
 }
