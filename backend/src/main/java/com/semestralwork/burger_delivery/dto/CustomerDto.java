@@ -42,6 +42,7 @@ public class CustomerDto {
         this.phone = customer.getPhone();
         this.allowNesletter = customer.getAllowNewsletters();
         this.customerType = customer.getCustomerType();
+        this.id = Math.toIntExact(customer.getCustomerId());
     }
 
     public String getName() {
