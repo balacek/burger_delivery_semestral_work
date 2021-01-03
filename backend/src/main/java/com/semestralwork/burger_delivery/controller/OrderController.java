@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/order")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderController {
 
@@ -33,7 +33,7 @@ public class OrderController {
         return new ResponseEntity<DeliveryOrder>(orderService.getDeliveryOrderById(id).orElse(null), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create-order", method = RequestMethod.POST)
+    @RequestMapping(value = "/order/create-order", method = RequestMethod.POST)
     public ResponseEntity<DeliveryOrder> createOrder(@RequestBody CreateOrderDto createOrderDto){
         orderService.createOrder(createOrderDto);
 
