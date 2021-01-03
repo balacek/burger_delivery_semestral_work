@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function orderDetail(props) {
   const classes = useStyles();
+
+  const [isAdmin, setIsAdmin] = useState(props.customerType);
+
+  useEffect(() => {
+    setIsAdmin(localStorage.getItem("customerType"))
+  }, [])
 
   return (
     <React.Fragment>
@@ -88,7 +94,7 @@ export default function orderDetail(props) {
             );
           })
         : null}
-      {props.isAdmin && props.order ? (
+      {isAdmin === 'ADMINISTATOR' && props.order ? (
         <Button
           type="submit"
           variant="contained"

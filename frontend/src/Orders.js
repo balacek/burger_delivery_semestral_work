@@ -33,11 +33,11 @@ const orders = (props) => {
   const [lastId, setLastId] = useState();
 
   const loadData = () => {
-    if (props.customerType === "ADMINISTATOR") {
+    if (localStorage.getItem("customerType") === "ADMINISTATOR") {
       axious
         .get(`http://localhost:8080/api/orders`, {
           headers: {
-            Authorization: "Bearer " + props.token, //the token is a variable which holds the token
+            Authorization: "Bearer " + localStorage.getItem("token"), //the token is a variable which holds the token
           },
         })
         .then(
@@ -48,9 +48,9 @@ const orders = (props) => {
         );
     } else {
       axious
-        .get(`http://localhost:8080/api/customer-orders?email=${props.email}`, {
+        .get(`http://localhost:8080/api/customer-orders?email=${localStorage.getItem("email")}`, {
           headers: {
-            Authorization: "Bearer " + props.token, //the token is a variable which holds the token
+            Authorization: "Bearer " + localStorage.getItem("token"), //the token is a variable which holds the token
           },
         })
         .then(
@@ -63,6 +63,7 @@ const orders = (props) => {
   }
 
   useEffect(() => {
+    props.getData();
     loadData();
   }, []);
 
@@ -70,7 +71,7 @@ const orders = (props) => {
     axious
       .post(`http://localhost:8080/api/order-delivered?orderId=${lastId}`,{}, {
         headers: {
-          Authorization: "Bearer " + props.token, //the token is a variable which holds the token
+          Authorization: "Bearer " + localStorage.getItem("token"), //the token is a variable which holds the token
         }
       })
       .then(
@@ -154,4 +155,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(orders);
+const mapDispatchToProps = dispatch => {
+  return {
+    getData: () => dispatch({
+      type: 'PERSIST'
+    })
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(orders);

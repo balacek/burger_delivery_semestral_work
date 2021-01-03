@@ -34,19 +34,22 @@ function OrderPage(props) {
   };
 
   useEffect(() => {
-    if(props.email !== undefined){
-      axios.get(`http://localhost:8080/api/customer-detail?email=${props.email}`, {
-        headers: {
-          Authorization: 'Bearer ' + props.token //the token is a variable which holds the token
-        }
-       })
-      .then(
-        (res) => {
-          props.initUser(res.data.id, "ADMINISTATOR");
-        },
-        (err) => console.log(err)
-      );
-    }
+    props.getData();
+      if (localStorage.getItem("email") != undefined) {
+        axios
+          .get(`http://localhost:8080/api/customer-detail?email=${localStorage.getItem("email")}`, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"), //the token is a variable which holds the token
+            },
+          })
+          .then(
+            (res) => {
+              props.initUser(res.data.id, res.data.customerType);
+            },
+            (err) => console.log(err)
+          );
+      }
+    
   }, []);
 
   const [ingredients, setIngredients] = useState([{}]);
@@ -248,7 +251,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: "INITUSER",
         userId: userId,
-        customerType: customerType
+        customerType: customerType,
+      }),
+    getData: () =>
+      dispatch({
+        type: "PERSIST",
       }),
   };
 };
@@ -257,7 +264,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     email: state.email,
-    userId: state.userId
+    userId: state.userId,
   };
 };
 
