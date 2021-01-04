@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
@@ -20,6 +20,11 @@ const modalContent = (props) => {
   const [city, setCity] = useState('');
   const [psc, setPsc] = useState();
   const [allowNewsletter, setAllowNewsletter] = useState(true);
+  const [isSign, setIsSign] = useState(false);
+
+  useEffect(() => {
+      setIsSign(localStorage.getItem("token") ? true : false);
+  }, )
 
 
   return (
@@ -36,7 +41,10 @@ const modalContent = (props) => {
       </div>
       <form className={classes.form} noValidate>
         <div style={{ textAlign: "center" }}>
-          <TextField
+          {
+            isSign ? null : (
+            <React.Fragment>
+ <TextField
             variant="outlined"
             margin="normal"
             required
@@ -81,6 +89,10 @@ const modalContent = (props) => {
             onChange={ (e) => setEmail(e.target.value)} 
             className={classes.textfield}
           />
+            </React.Fragment>) 
+          }
+         
+          
           <TextField
             variant="outlined"
             margin="normal"
@@ -115,9 +127,14 @@ const modalContent = (props) => {
             className={classes.textfield}
           />
           <div>
-           <FormControlLabel
-          control={<Checkbox value="remember" color="secondary" checked={allowNewsletter}  onChange={ () => setAllowNewsletter(!allowNewsletter)} />}
-          label="Zasílat novinky o změnách" />
+            {
+              isSign ? null : (
+                <FormControlLabel
+                control={<Checkbox value="remember" color="secondary" checked={allowNewsletter}  onChange={ () => setAllowNewsletter(!allowNewsletter)} />}
+                label="Zasílat novinky o změnách" />
+              )
+            }
+          
           </div>
           <div style={{display: 'inline-grid', width: '250px', marginBottom: '1.5em'}}>
         <Button
