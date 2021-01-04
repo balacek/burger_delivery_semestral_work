@@ -117,9 +117,13 @@ const signInComponent = (props) => {
         </Button>
         <Grid container>
           <Grid item xs>
+            {
+              /*
             <Link variant="body2" color="secondary" style={{cursor: 'pointer'}} onClick={() => props.changeStepCallback(3)}>
               Zapomenuté heslo?
             </Link>
+              */
+            }
           </Grid>
           <Grid item>
             <Link variant="body2" color="secondary" style={{cursor: 'pointer'}} onClick={() => props.changeStepCallback(2)}>
