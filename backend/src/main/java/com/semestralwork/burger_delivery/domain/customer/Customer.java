@@ -50,6 +50,14 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(BigDecimal phone, String name, String surname, String email, boolean allowNews) {
+        this.phone = phone;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.allowNewsletters = allowNews;
+    }
+
     public Boolean getAllowNewsletters() {
         return allowNewsletters;
     }

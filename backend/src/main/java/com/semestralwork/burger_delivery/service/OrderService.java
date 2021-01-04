@@ -65,7 +65,12 @@ public class OrderService {
             customer.setOrders(orders);
             customerService.saveCustomer(customer);
         }else{
-            deliveryOrderRepository.save(deliveryOrder);
+            Customer customer1 = new Customer(createOrderDto.getPhone(), createOrderDto.getName(), createOrderDto.getSurname(),
+                    createOrderDto.getEmail(),createOrderDto.isAllowNews());
+            List<DeliveryOrder> orders = new ArrayList<>();
+            orders.add(deliveryOrder);
+            customer1.setOrders(orders);
+            customerService.saveCustomer(customer1);
         }
     }
 

@@ -26,10 +26,12 @@ public class CustomerService {
 
     @Transactional(rollbackOn = Exception.class)
     public CustomerDto registerCustomer(CustomerDto customerDto) throws CustomException {
-        customerExistsRegistration(customerDto.getEmail());
+        Customer customer = customerExistsRegistration(customerDto.getEmail());
         validateEmail(customerDto.getEmail());
 
-        Customer customer = new Customer();
+        if(customer == null){
+            customer = new Customer();
+        }
         customer.setName(customerDto.getName());
         customer.setSurname(customerDto.getSurname());
         customer.setEmail(customerDto.getEmail());
@@ -53,10 +55,8 @@ public class CustomerService {
             throw new CustomException("Email in registration is not valid");
     }
 
-    private void customerExistsRegistration(String email) {
-        Optional<Customer> customerByEmail = customerRepository.findCustomerByEmail(email);
-        if (customerByEmail.isPresent())
-            throw new CustomException("Customer with this email already exists!");
+    private Customer customerExistsRegistration(String email) {
+        return customerRepository.findCustomerByEmail(email).orElse(null);
     }
 
     public Customer getCustomer(String email) throws CustomException {
