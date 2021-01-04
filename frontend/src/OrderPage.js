@@ -28,6 +28,7 @@ function OrderPage(props) {
   const classes = useStyles();
 
   const [tabIndex, setTabIndex] = useState(0);
+  const [error, setError] = useState('');
 
   const handleTabClick = (_, index) => {
     setTabIndex(index);
@@ -169,8 +170,11 @@ function OrderPage(props) {
       .then(
         (res) => {
           window.location.reload();
+          setError('');
         },
-        (error) => console.log(error)
+        (error) => {
+          setError(error.response.data.message)
+        }
       );
   };
 
@@ -229,6 +233,8 @@ function OrderPage(props) {
         style={{ zIndex: "1200" }}
       >
         <BuildControls
+          setErrMessage={setError}
+          errMess={error}
           controls={controls}
           ing={ingredients}
           add={addIngredient}

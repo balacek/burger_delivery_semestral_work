@@ -136,6 +136,12 @@ const modalContent = (props) => {
             }
           
           </div>
+          {
+            props.error !== '' ? ( <div style={{backgroundColor: 'red', textAlign: 'center'}}>
+          {props.error}
+              </div>) : null
+          }
+         
           <div style={{display: 'inline-grid', width: '250px', marginBottom: '1.5em'}}>
         <Button
           type="submit"
