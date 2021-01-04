@@ -2,6 +2,7 @@ package com.semestralwork.burger_delivery.controller;
 
 import com.semestralwork.burger_delivery.domain.order.DeliveryOrder;
 import com.semestralwork.burger_delivery.dto.CreateOrderDto;
+import com.semestralwork.burger_delivery.exception.CustomException;
 import com.semestralwork.burger_delivery.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,10 +30,11 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order/create-order", method = RequestMethod.POST)
-    public ResponseEntity<DeliveryOrder> createOrder(@RequestBody CreateOrderDto createOrderDto){
-        orderService.createOrder(createOrderDto);
+    public ResponseEntity<DeliveryOrder> createOrder(@RequestBody CreateOrderDto createOrderDto) throws CustomException {
+        throw new CustomException("ss");
+       // orderService.createOrder(createOrderDto);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+       // return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/order-delivered", method = RequestMethod.POST)
