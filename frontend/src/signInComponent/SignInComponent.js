@@ -90,10 +90,15 @@ const signInComponent = (props) => {
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
         />
-        <FormControlLabel
+        {
+          /*
+<FormControlLabel
           control={<Checkbox value="remember" color="secondary" />}
           label="Uložit přihlašovací údaje"
         />
+          */
+        }
+        
         <Button
           type="submit"
           fullWidth
