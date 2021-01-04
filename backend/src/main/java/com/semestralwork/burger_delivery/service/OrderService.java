@@ -58,15 +58,13 @@ public class OrderService {
         deliveryOrder.setBurgers(burgerList);
         deliveryOrder.setOrderstate(ORDERSTATE.PENDING);
 
-        //sign an order to customer if some customer already exist in DB, by ID or email, phone
+        //sign an order to customer if some customer already exist in DB
         if(customer != null) {
             List<DeliveryOrder> orders = customer.getOrders();
             orders.add(deliveryOrder);
             customer.setOrders(orders);
             customerService.saveCustomer(customer);
         }else{
-            //TODO create customer
-            //allow nesletters set
             deliveryOrderRepository.save(deliveryOrder);
         }
     }
