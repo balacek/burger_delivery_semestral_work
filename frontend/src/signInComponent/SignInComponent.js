@@ -40,6 +40,7 @@ const signInComponent = (props) => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const signIn = (e) => {
     e.preventDefault();
@@ -47,9 +48,13 @@ const signInComponent = (props) => {
       username: email,
       password: password
     }).then(res => {
+      setError(false);
       props.setToken(res.data.token, res.data.username);
       Router.push('/createOrder');
-    }, (error) => console.log(error))
+    }, (error) => {
+      console.log(error)
+      setError(true);
+    })
   }
 
   return (
@@ -98,6 +103,13 @@ const signInComponent = (props) => {
         />
           */
         }
+         {
+          error ? (
+            <div style={{backgroundColor: 'red', textAlign: 'center'}}>
+            Nesprávné přihlašovací údaje
+            </div>
+          ) : null
+        }
         
         <Button
           type="submit"
@@ -120,6 +132,7 @@ const signInComponent = (props) => {
         >
           Pokračovat bez přihlášení
         </Button>
+       
         <Grid container>
           <Grid item xs>
             {
