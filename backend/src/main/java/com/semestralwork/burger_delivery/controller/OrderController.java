@@ -4,6 +4,7 @@ import com.semestralwork.burger_delivery.domain.order.DeliveryOrder;
 import com.semestralwork.burger_delivery.dto.CreateOrderDto;
 import com.semestralwork.burger_delivery.exception.CustomException;
 import com.semestralwork.burger_delivery.service.OrderService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import java.util.List;
 @RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderController {
+
+    private static final Logger logger = Logger.getLogger(OrderController.class);
 
     @Autowired
     OrderService orderService;

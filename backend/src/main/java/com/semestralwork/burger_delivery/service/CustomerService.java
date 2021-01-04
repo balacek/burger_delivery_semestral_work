@@ -1,5 +1,6 @@
 package com.semestralwork.burger_delivery.service;
 
+import com.semestralwork.burger_delivery.controller.CustomerController;
 import com.semestralwork.burger_delivery.domain.customer.Customer;
 import com.semestralwork.burger_delivery.domain.customer.CustomerRepository;
 import com.semestralwork.burger_delivery.domain.order.DeliveryOrder;
@@ -7,6 +8,7 @@ import com.semestralwork.burger_delivery.dto.CustomerDto;
 import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
 import com.semestralwork.burger_delivery.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,13 +23,18 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
+    private static final Logger logger = Logger.getLogger(CustomerService.class);
+
     @Autowired
     CustomerRepository customerRepository;
 
     @Transactional(rollbackOn = Exception.class)
     public CustomerDto registerCustomer(CustomerDto customerDto) throws CustomException {
-        Customer customer = customerExistsRegistration(customerDto.getEmail());
+        //find if customer exist by giving mandatory all fields since i am creating customer for not registred behind
+        //the scene
+        Customer customer = customerExistsRegistration(customerDto);
         validateEmail(customerDto.getEmail());
+        validatePhoneIsFilled(customerDto.getPhone());
 
         if(customer == null){
             customer = new Customer();
@@ -44,6 +51,11 @@ public class CustomerService {
         return new CustomerDto(customer);
     }
 
+    private void validatePhoneIsFilled(BigDecimal phone) {
+        if(phone == null || StringUtils.isBlank(phone.toString()))
+            throw new CustomException("Phone is not valid");
+    }
+
     public Customer customerDetail(String email) {
         if (StringUtils.isNotBlank(email))
             return customerRepository.findCustomerByEmail(email).orElse(null);
@@ -55,8 +67,13 @@ public class CustomerService {
             throw new CustomException("Email in registration is not valid");
     }
 
-    private Customer customerExistsRegistration(String email) {
-        return customerRepository.findCustomerByEmail(email).orElse(null);
+    private Customer customerExistsRegistration(CustomerDto customerDto) {
+        return customerRepository.findCustomerByMandatoryFieldsAndMail(
+                customerDto.getEmail(),
+                customerDto.getPhone(),
+                customerDto.getName(),
+                customerDto.getSurname()
+        ).orElse(null);
     }
 
     public Customer getCustomer(String email) throws CustomException {

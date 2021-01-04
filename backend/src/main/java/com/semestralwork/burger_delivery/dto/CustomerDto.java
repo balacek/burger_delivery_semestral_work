@@ -2,6 +2,7 @@ package com.semestralwork.burger_delivery.dto;
 
 import com.semestralwork.burger_delivery.domain.customer.Customer;
 import com.semestralwork.burger_delivery.enums.CUSTOMERTYPE;
+import com.semestralwork.burger_delivery.exception.CustomException;
 
 import java.math.BigDecimal;
 
@@ -36,6 +37,9 @@ public class CustomerDto {
     }
 
     public CustomerDto(Customer customer) {
+        if(customer == null){
+            throw new CustomException("Customer is null in constructor if CustomerDto.java");
+        }
         this.name = customer.getName();
         this.surname = customer.getSurname();
         this.email = customer.getEmail();

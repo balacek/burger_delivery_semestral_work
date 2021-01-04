@@ -4,6 +4,7 @@ import com.semestralwork.burger_delivery.config.JWTTokenUtil;
 import com.semestralwork.burger_delivery.dto.JWTRequest;
 import com.semestralwork.burger_delivery.dto.JWTResponse;
 import com.semestralwork.burger_delivery.service.JWTUserDetailsService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 public class JWTAuthenticationController {
+
+    private static final Logger logger = Logger.getLogger(JWTAuthenticationController.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;

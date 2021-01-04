@@ -7,23 +7,27 @@ import com.semestralwork.burger_delivery.dto.CustomerDto;
 import com.semestralwork.burger_delivery.exception.CustomException;
 import com.semestralwork.burger_delivery.service.CustomerService;
 import org.apache.commons.validator.ValidatorException;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.apache.log4j.Logger;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerController {
 
+    private static final Logger logger = Logger.getLogger(CustomerController.class);
+
     @Autowired
     private CustomerService customerService;
 
     @RequestMapping(value = "/customer/create-customer", method = RequestMethod.POST)
-    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody CustomerDto customerDto) throws CustomException {
+    public ResponseEntity<CustomerDto> registerCustomer(@RequestBody CustomerDto customerDto) throws CustomException {
         return new ResponseEntity<CustomerDto>(customerService.registerCustomer(customerDto), HttpStatus.CREATED);
     }
 
