@@ -34,10 +34,9 @@ public class OrderController {
 
     @RequestMapping(value = "/order/create-order", method = RequestMethod.POST)
     public ResponseEntity<DeliveryOrder> createOrder(@RequestBody CreateOrderDto createOrderDto) throws CustomException {
-        throw new CustomException("ss");
-       // orderService.createOrder(createOrderDto);
+        orderService.createOrder(createOrderDto);
 
-       // return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/order-delivered", method = RequestMethod.POST)
