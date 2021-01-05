@@ -27,11 +27,6 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/order-detail", method = RequestMethod.GET)
-    public ResponseEntity<DeliveryOrder> getDeliveryOrderById(@RequestParam String id){
-        return new ResponseEntity<DeliveryOrder>(orderService.getDeliveryOrderById(id).orElse(null), HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/order/create-order", method = RequestMethod.POST)
     public ResponseEntity<DeliveryOrder> createOrder(@RequestBody CreateOrderDto createOrderDto) throws CustomException {
         orderService.createOrder(createOrderDto);
