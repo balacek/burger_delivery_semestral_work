@@ -19,19 +19,31 @@ const registerComponent = (props) => {
   const [password, setPassword] = useState();
   const [phone, setPhone] = useState();
   const [allowNewsletters, setAllowNewsletter] = useState(true);
+  const [error, setError] = useState("");
 
   const createAccount = (e) => {
-    e.preventDefault()
-    axios.post("http://localhost:8080/api/customer/create-customer", {
-      name: name,
-      surname: surname,
-      email: email,
-      password: password,
-      phone: phone,
-      allowNewsletters: allowNewsletters
-    }).then(res => {
-      props.changeStepCallback(1);
-    }, (error) => console.log(error))
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/customer/create-customer", {
+        name: name,
+        surname: surname,
+        email: email,
+        password: password,
+        phone: phone,
+        allowNewsletters: allowNewsletters,
+      })
+      .then(
+        (res) => {
+          props.changeStepCallback(1);
+          setError("");
+        },
+        (error) => {
+          setError('Nastala chyba pri registraci');
+          if (error.response.data.message) {
+            setError(error.response.data.message);
+          }
+        }
+      );
   };
 
   const classes = useStyles();
@@ -120,6 +132,11 @@ const registerComponent = (props) => {
           control={<Checkbox value="remember" color="secondary" checked />}
           label="Zasílat novinky o změnách"
         />
+        {error !== "" ? (
+          <div style={{ backgroundColor: "red", textAlign: "center" }}>
+            {error}
+          </div>
+        ) : null}
         <Button
           type="submit"
           fullWidth
@@ -140,6 +157,7 @@ const registerComponent = (props) => {
         >
           Zpět
         </Button>
+        
         <Box mt={2}>
           <Copyright />
         </Box>
