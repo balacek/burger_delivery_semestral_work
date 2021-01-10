@@ -116,12 +116,12 @@ public class OrderService {
 
     private void checkIfOrderContainsAdressValues(CreateOrderDto createOrderDto) throws CustomException{
         if(createOrderDto.getAdress() != null){
-            if(createOrderDto.getAdress().getCity() == null || createOrderDto.getAdress().getStreet() == null
-                    || createOrderDto.getAdress().getPostalCode() == null){
+            if(StringUtils.isBlank(createOrderDto.getAdress().getCity()) || StringUtils.isBlank(createOrderDto.getAdress().getStreet())
+                    || StringUtils.isBlank(createOrderDto.getAdress().getPostalCode())){
                 throw new CustomException("Fields for order regarding customers are not enough");
             }
         }else{
-            throw new CustomException("Fields for order regarding adress are not valid");
+            throw new CustomException("Fields for order regarding adress are blank");
         }
     }
 
