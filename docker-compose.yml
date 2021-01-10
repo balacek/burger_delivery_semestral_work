@@ -11,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./bb.sql:/docker-entrypoint-initdb.d/1-bb.sql
+      - ./ddl-create.sql:/docker-entrypoint-initdb.d/1-ddl-create.sql
   backend:
     image: 'docker-spring-boot-postgres:latest'
     build: ./backend
