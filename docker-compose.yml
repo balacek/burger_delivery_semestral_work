@@ -5,20 +5,22 @@ services:
     image: 'postgres:13.1-alpine'
     container_name: db
     environment:
-      - POSTGRES_USER=compose-postgres
-      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=heslo1234
+      - POSTGRES_DB=postgresqldb
     ports:
-    - "5432:5432"
+      - "5432:5432"
+    volumes:
+      - ./bb.sql:/docker-entrypoint-initdb.d/1-bb.sql
   backend:
     image: 'docker-spring-boot-postgres:latest'
     build: ./backend
     container_name: backend
     ports:
-      - '8080:8080'
+      - 8080:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=compose-postgres
-      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgresqldb
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - db
+

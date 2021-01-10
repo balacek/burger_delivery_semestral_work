@@ -4,7 +4,7 @@
 <createdTime>2020-12-24 08:46:34 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -15,35 +15,24 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id" id="6FF83229-31D3-3B9F-4DDE-9986AE4FD1DB">
+<Attribute name="burgerId" id="6FF83229-31D3-3B9F-4DDE-9986AE4FD1DB">
 <createdBy>dbala</createdBy>
 <createdTime>2020-12-24 08:47:08 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="name" id="E853A8C6-9F3C-928D-872B-852176898D9D">
+<Attribute name="burgerName" id="E853A8C6-9F3C-928D-872B-852176898D9D">
 <createdBy>dbala</createdBy>
 <createdTime>2020-12-24 08:47:11 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="type" id="67E60509-E42F-268B-15DF-BF16D1F4A6E5">
-<createdBy>dbala</createdBy>
-<createdTime>2020-12-24 08:48:01 UTC</createdTime>
-<ownerDesignName>burger_delivery_data_model</ownerDesignName>
-<engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>

@@ -4,7 +4,7 @@
 <createdTime>2020-12-24 08:54:09 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -15,12 +15,12 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id" id="FEDB158A-7117-C441-C5AB-CB759FE42717">
+<Attribute name="adressId" id="FEDB158A-7117-C441-C5AB-CB759FE42717">
 <createdBy>dbala</createdBy>
 <createdTime>2020-12-24 08:54:17 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
@@ -30,7 +30,7 @@
 <createdTime>2020-12-24 08:54:21 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
@@ -40,7 +40,7 @@
 <createdTime>2020-12-24 08:54:49 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
@@ -50,7 +50,7 @@
 <createdTime>2020-12-24 08:54:52 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
@@ -62,7 +62,7 @@
 <createdTime>2020-12-24 08:54:19 UTC</createdTime>
 <ownerDesignName>burger_delivery_data_model</ownerDesignName>
 <engineerTo>
-<item key="447CA8E0-097A-496D-F34A-305DC28B4217" value="true"/>
+<item key="F1006DCC-951C-9F5F-9CCD-EF61FC95991D" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
