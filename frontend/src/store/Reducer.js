@@ -16,7 +16,7 @@ const rootReducer = (state = inicialState, action) => {
         email: action.email,
       };
     case "LOGOUT":
-      localStorage.setItem("token", undefined);
+      localStorage.clear();
       return {
         ...state,
         token: undefined,
