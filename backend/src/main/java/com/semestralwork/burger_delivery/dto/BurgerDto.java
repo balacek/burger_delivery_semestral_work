@@ -28,4 +28,12 @@ public class BurgerDto {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+    @Override
+    public String toString() {
+        return "BurgerDto{" +
+                "burgerName='" + burgerName + '\'' +
+                ", ingredients=" + ingredients +
+                '}';
+    }
 }

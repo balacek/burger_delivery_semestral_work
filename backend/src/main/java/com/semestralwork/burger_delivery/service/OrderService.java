@@ -45,6 +45,7 @@ public class OrderService {
     public void createOrder(CreateOrderDto createOrderDto) throws CustomException {
         checkIfOrderContainsCustomerValues(createOrderDto);
         checkIfOrderContainsAdressValues(createOrderDto);
+        checkIfContainsBurgerName(createOrderDto);
 
         Customer customer = returnCustomerByIdOrEmailToConnectOrder(createOrderDto);
 
@@ -76,6 +77,13 @@ public class OrderService {
             customer1.setOrders(orders);
             customerService.saveCustomer(customer1);
         }
+    }
+
+    private void checkIfContainsBurgerName(CreateOrderDto createOrderDto) throws CustomException{
+        createOrderDto.getBurgers().forEach(burgerDto -> {
+            if(StringUtils.isBlank(burgerDto.getBurgerName()))
+                throw new CustomException("Burger does not contain burger name" + burgerDto.toString());
+        });
     }
 
     private Customer returnCustomerByIdOrEmailToConnectOrder(CreateOrderDto createOrderDto){

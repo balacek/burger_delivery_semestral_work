@@ -30,11 +30,12 @@ public class CustomerService {
 
     @Transactional(rollbackOn = Exception.class)
     public CustomerDto registerCustomer(CustomerDto customerDto) throws CustomException {
+        validateIfHasRequiredFields(customerDto);
+        validateEmail(customerDto.getEmail());
+        validatePhoneIsFilled(customerDto.getPhone());
         //find if customer exist by giving mandatory all fields since i am creating customer for not registred behind
         //the scene
         Customer customer = customerExistsRegistration(customerDto);
-        validateEmail(customerDto.getEmail());
-        validatePhoneIsFilled(customerDto.getPhone());
 
         if(customer == null){
             customer = new Customer();
@@ -51,6 +52,13 @@ public class CustomerService {
         return new CustomerDto(customer);
     }
 
+    private void validateIfHasRequiredFields(CustomerDto customerDto){
+        if(StringUtils.isBlank(customerDto.getName()) || StringUtils.isBlank(customerDto.getSurname()) ||
+                StringUtils.isBlank(customerDto.getPassword())) {
+            throw new CustomException("Registration form does has at least one empty field");
+        }
+    }
+
     private void validatePhoneIsFilled(BigDecimal phone) {
         if(phone == null || StringUtils.isBlank(phone.toString()))
             throw new CustomException("Phone is not valid");
@@ -63,6 +71,8 @@ public class CustomerService {
     }
 
     private void validateEmail(String email) {
+        if(StringUtils.isBlank(email))
+            throw new CustomException("Email in registration is empty");
         if (!EmailValidator.getInstance().isValid(email))
             throw new CustomException("Email in registration is not valid");
     }
