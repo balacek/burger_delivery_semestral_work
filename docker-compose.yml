@@ -12,6 +12,7 @@ services:
       - "5432:5432"
     volumes:
       - ./ddl-create.sql:/docker-entrypoint-initdb.d/1-ddl-create.sql
+      - ./dml.sql:/docker-entrypoint-initdb.d/1-dml.sql
   backend:
     image: 'docker-spring-boot-postgres:latest'
     build: ./backend

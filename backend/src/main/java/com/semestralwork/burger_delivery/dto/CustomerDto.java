@@ -20,14 +20,14 @@ public class CustomerDto {
 
     private String password;
 
-    private boolean allowNesletter;
+    private Boolean allowNesletter;
 
     private CUSTOMERTYPE customerType;
 
     public CustomerDto() {
     }
 
-    public CustomerDto(String name, String surname, String email, BigDecimal phone, String password, boolean allowNesletter) {
+    public CustomerDto(String name, String surname, String email, BigDecimal phone, String password, Boolean allowNesletter) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -89,11 +89,11 @@ public class CustomerDto {
         this.password = password;
     }
 
-    public boolean isAllowNesletter() {
+    public Boolean isAllowNesletter() {
         return allowNesletter;
     }
 
-    public void setAllowNesletter(boolean allowNesletter) {
+    public void setAllowNesletter(Boolean allowNesletter) {
         this.allowNesletter = allowNesletter;
     }
 
