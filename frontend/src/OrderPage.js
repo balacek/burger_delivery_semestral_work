@@ -38,10 +38,11 @@ function OrderPage(props) {
     props.getData();
       if (localStorage.getItem("email") != undefined) {
         axios
-          .get(`http://localhost:8080/api/customer-detail?email=${localStorage.getItem("email")}`, {
+          .get(`http://localhost:8080/api/customer-detail?email=${localStorage.getItem("email")}`,
+           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"), //the token is a variable which holds the token
-            },
+            }
           })
           .then(
             (res) => {
