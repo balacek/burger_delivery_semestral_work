@@ -142,7 +142,7 @@ function OrderPage(props) {
         },
         burgers: [
           {
-            burgerName: "pipka",
+            burgerName: address.burgerName,
             ingredients: [
               {
                 price: count.salad !== undefined ? count.salad * 10 : 0,

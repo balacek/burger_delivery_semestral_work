@@ -21,6 +21,7 @@ const modalContent = (props) => {
   const [psc, setPsc] = useState();
   const [allowNewsletter, setAllowNewsletter] = useState(true);
   const [isSign, setIsSign] = useState(false);
+  const [burgerName, setBurgerName] = useState();
 
   useEffect(() => {
       setIsSign(localStorage.getItem("token") ? true : false);
@@ -92,7 +93,17 @@ const modalContent = (props) => {
             </React.Fragment>) 
           }
          
-          
+         <TextField
+            variant="outlined"
+            margin="normal"
+            name="burgerName"
+            label="Název burgeru"
+            required
+            type="text"
+            id="burgerName"
+            onChange={ (e) => setBurgerName(e.target.value)} 
+            className={classes.textfield}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -158,7 +169,8 @@ const modalContent = (props) => {
                 street: street,
                 city: city,
                 psc, psc,
-                allowNewsletter: allowNewsletter
+                allowNewsletter: allowNewsletter,
+                burgerName: burgerName
               }
               props.createOrderCallback(address);
           }}
